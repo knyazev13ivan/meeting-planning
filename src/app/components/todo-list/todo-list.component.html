@@ -1,7 +1,6 @@
-<!-- <ul class="todo-list"> -->
-  <!-- <li *ngFor="let item of todoListService.todoList"> -->
-    <app-todo-item *ngFor="let item of todoListService.todoList" [todoItem]="item"></app-todo-item>
-    
-
-  <!-- </li> -->
-<!-- </ul> -->
+<app-todo-item
+  *ngFor="let item of todoListService.todoList"
+  [todoItem]="item"
+  (handleClickDelete)="todoListService.delete($event)"
+  (handleClickChangeStatus)="todoListService.changeStatus($event)"
+></app-todo-item>

@@ -32,23 +32,32 @@
       padding: 5px;
       font-style: italic;
     }
-
-    .important {
-      background-color: $important-color;
-    }
-
-    .completed {
-      background-color: $completed-color;
-    }
   }
 
   &-controls {
     display: flex;
     flex-direction: column;
 
-    &__delete-button,
-    &__status-button {
-      margin: 5px 5px;
+    &__status-toogle-buttons {
+      display: flex;
+      flex-direction: column;
     }
+
+    button {
+      margin-top: 5px;
+      min-width: 170px;
+    }
+
+    &__delete-button {
+      background-color: $main-color;
+    }
+  }
+
+  .important {
+    background-color: $important-color;
+  }
+
+  .completed {
+    background-color: $completed-color;
   }
 }
