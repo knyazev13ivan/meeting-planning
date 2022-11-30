@@ -1,0 +1,53 @@
+@import "../../../variables.scss";
+
+.todo-item {
+  display: flex;
+  flex-direction: row;
+
+  &-body {
+    width: 500px;
+    padding: 0px 15px;
+
+    &__header {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #bbbbbb;
+    }
+
+    &__title {
+      padding: 5px;
+      font-weight: bold;
+    }
+
+    &__status {
+      padding: 5px;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    &__description {
+      padding: 5px;
+      font-style: italic;
+    }
+
+    .important {
+      background-color: $important-color;
+    }
+
+    .comleted {
+      background-color: $completed-color;
+    }
+  }
+
+  &-controls {
+    display: flex;
+    flex-direction: column;
+
+    &__delete-button,
+    &__status-button {
+      margin: 5px 5px;
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-export interface ITodoElem {
+export interface ITodoItem {
   id: number;
   title: string;
   description: string;
@@ -11,7 +11,7 @@ export interface ITodoElem {
   providedIn: 'root',
 })
 export class TodoListService {
-  todoList: ITodoElem[] = [
+  todoList: ITodoItem[] = [
     {
       id: 0,
       title: 'Обычный митап',
@@ -38,16 +38,16 @@ export class TodoListService {
   constructor() {}
 
   delete(id: number): void {
-    this.todoList = this.todoList.filter((elem) => elem.id !== id);
+    this.todoList = this.todoList.filter((item) => item.id !== id);
   }
 
-  add(elem: ITodoElem): void {
-    this.todoList.push(elem);
+  add(item: ITodoItem): void {
+    this.todoList.push(item);
   }
 
   changeStatus(id: number, status: 'normal' | 'important' | 'completed'): void {
-    const elem = this.todoList.find((elem) => elem.id === id);
+    const item = this.todoList.find((item) => item.id === id);
 
-    if (elem) elem.status = status;
+    if (item) item.status = status;
   }
 }
