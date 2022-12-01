@@ -41,21 +41,36 @@ export class TodoListService {
       status: 'normal',
     },
   ];
+  
+  filteredList = this.todoList;
 
   constructor() {}
 
   delete(id: number): void {
-    this.todoList = this.todoList.filter((item) => item.id !== id);
+    this.filteredList = this.filteredList.filter((item) => item.id !== id);
   }
 
   add(item: Pick<ITodoItem, 'title' | 'description' | 'status'>): void {
-    this.todoList.push({id: this.getId(), ...item});
+    this.filteredList.push({ id: this.getId(), ...item });
   }
 
   changeStatus({ id, status }: Pick<ITodoItem, 'id' | 'status'>): void {
-    const item = this.todoList.find((item) => item.id === id);
+    const item = this.filteredList.find((item) => item.id === id);
 
     if (item) item.status = status;
+  }
+
+  getFilteredList({
+    searchValue,
+    type,
+  }: {
+    searchValue: string;
+    type: 'title' | 'description' | 'status';
+  }) {
+    
+    this.filteredList = this.todoList
+    .slice(0)
+    .filter((item) => item[type].includes(searchValue));
   }
 
   getId() {

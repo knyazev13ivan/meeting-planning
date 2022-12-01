@@ -1,0 +1,13 @@
+<div class="search">
+<<<<<<< HEAD
+  <input [(ngModel)]="searchValue" type="text" class="search__input" placeholder="важ"/>
+=======
+  <input [(ngModel)]="searchValue" type="text" class="search__input" placeholder="Поиск"/>
+>>>>>>> 7a7ee9b (add search)
+  <select [(ngModel)]="type" name="type" class="search__filter">
+    <option [value]="'title'">В названии</option>
+    <option [value]="'description'">В описании</option>
+    <option [value]="'status'">По важности</option>
+  </select>
+  <button class="search__button" (click)="getSearchParams(searchValue, type)">Поиск</button>
+</div>

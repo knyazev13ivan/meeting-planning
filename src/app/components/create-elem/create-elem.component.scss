@@ -7,13 +7,12 @@
   align-items: center;
   position: relative;
 
-  margin: 5px auto;
+  margin: 0px auto 5px;
   padding: 10px 20px;
   width: 500px;
   border-radius: 5px;
 
   &__button {
-    margin-top: 5px;
     width: 500px;
     border: 2px solid $second-color;
     color: $second-color;

@@ -27,8 +27,8 @@ export class TodoItemComponent {
   public handleClickChangeStatus = new EventEmitter();
 
   changeStatus(id: number, status: string) {
-    this.handleClickChangeStatus.emit({id, status});
+    this.handleClickChangeStatus.emit({ id, status });
 
     this.isHideChangeStatuses = !this.isHideChangeStatuses;
-  } 
+  }
 }

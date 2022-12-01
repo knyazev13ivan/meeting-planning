@@ -21,8 +21,6 @@ export class CreateElemComponent {
   public handleClickCreate = new EventEmitter();
 
   createNewMeetapp() {
-    console.log(this.todoItem);
-
     if (this.todoItem.title) {
       this.handleClickCreate.emit(this.todoItem);
       this.isCreateMode = !this.isCreateMode;
