@@ -1,12 +1,17 @@
-<app-create-elem
-  (handleClickCreate)="todoListService.add($event)"
-></app-create-elem>
+<div class="todo-list">
+  <app-search (handleChangeSearch)="this.getFilteredList($event)"></app-search>
 
-<ul class="todo-list">
-  <app-todo-item
-    *ngFor="let item of todoListService.todoList"
-    [todoItem]="item"
-    (handleClickDelete)="todoListService.delete($event)"
-    (handleClickChangeStatus)="todoListService.changeStatus($event)"
-  ></app-todo-item>
-</ul>
+  <app-create-elem
+    (handleClickCreate)="add($event)"
+  ></app-create-elem>
+
+  <ul class="todo-list__list" >
+    <app-todo-item
+      *ngFor="let item of this.filteredList; trackBy: trackByItems"
+      [todoItem]="item"
+      (handleClickDelete)="delete($event)"
+      (handleClickChangeStatus)="changeStatus($event)"
+      
+    ></app-todo-item>
+  </ul>
+</div>
