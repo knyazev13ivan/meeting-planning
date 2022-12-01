@@ -48,13 +48,17 @@ export class TodoListService {
     this.todoList = this.todoList.filter((item) => item.id !== id);
   }
 
-  add(item: ITodoItem): void {
-    this.todoList.push(item);
+  add(item: Pick<ITodoItem, 'title' | 'description' | 'status'>): void {
+    this.todoList.push({id: this.getId(), ...item});
   }
 
   changeStatus({ id, status }: Pick<ITodoItem, 'id' | 'status'>): void {
     const item = this.todoList.find((item) => item.id === id);
 
     if (item) item.status = status;
+  }
+
+  getId() {
+    return this.todoList[this.todoList.length - 1].id + 1;
   }
 }

@@ -1,0 +1,38 @@
+<div class="create-modul">
+  <button
+    type="button"
+    class="create-modul__button"
+    (click)="isCreateMode = !isCreateMode"
+  >
+    {{ isCreateMode ? "Отмена" : "Добавить новый митап" }}
+  </button>
+
+  <div *ngIf="isCreateMode" class="create-modul-form">
+    <label class="create-modul-form__label-text-field" for="titleInput">
+      <span class="create-modul-form__label-text">Название</span>
+      <input
+        [(ngModel)]="todoItem.title"
+        type="text"
+        class="create-modul-form__input"
+        name="title"
+        id="titleInput"
+      />
+    </label>
+    <label class="create-modul-form__label-text-field" for="descriptionInput">
+      <span class="create-modul-form__label-text">Описание</span>
+      <input
+        [(ngModel)]="todoItem.description"
+        type="text"
+        class="create-modul-form__input"
+        name="description"
+        id="descriptionInput"
+      />
+    </label>
+    <button
+      class="create-modul-form__create-button"
+      (click)="createNewMeetapp()"
+    >
+      Создать
+    </button>
+  </div>
+</div>

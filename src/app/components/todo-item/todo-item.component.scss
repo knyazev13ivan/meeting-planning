@@ -4,10 +4,13 @@
   display: flex;
   flex-direction: row;
   margin-bottom: 10px;
+  padding: 5px 10px;
+  background-color: #303038;
+  border-radius: 5px;
 
   &-body {
     width: 600px;
-    padding: 0px 15px;
+    padding-right: 15px;
 
     &__header {
       display: flex;
@@ -23,7 +26,9 @@
     }
 
     &__status {
-      padding: 5px;
+      display: inline-block;
+      padding: 2px 4px;
+      border-radius: 3px;
       font-size: 1.2em;
       font-weight: bold;
     }
@@ -37,6 +42,7 @@
   &-controls {
     display: flex;
     flex-direction: column;
+    padding-bottom: 5px;
 
     &__status-toogle-buttons {
       display: flex;
