@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-export interface ITodoItem {
+export interface IMeetupItem {
   id: number;
   title: string;
   description: string;
@@ -10,8 +10,8 @@ export interface ITodoItem {
 @Injectable({
   providedIn: 'root',
 })
-export class TodoListService {
-  todoList: ITodoItem[] = [
+export class MeetupsListService {
+  meetupsList: IMeetupItem[] = [
     {
       id: 0,
       title: 'Обычный митап',
@@ -42,7 +42,7 @@ export class TodoListService {
     },
   ];
   
-  filteredList = this.todoList;
+  filteredList = this.meetupsList;
 
   constructor() {}
 
@@ -50,11 +50,11 @@ export class TodoListService {
     this.filteredList = this.filteredList.filter((item) => item.id !== id);
   }
 
-  add(item: Pick<ITodoItem, 'title' | 'description' | 'status'>): void {
+  add(item: Pick<IMeetupItem, 'title' | 'description' | 'status'>): void {
     this.filteredList.push({ id: this.getId(), ...item });
   }
 
-  changeStatus({ id, status }: Pick<ITodoItem, 'id' | 'status'>): void {
+  changeStatus({ id, status }: Pick<IMeetupItem, 'id' | 'status'>): void {
     const item = this.filteredList.find((item) => item.id === id);
 
     if (item) item.status = status;
@@ -68,12 +68,12 @@ export class TodoListService {
     type: 'title' | 'description' | 'status';
   }) {
     
-    this.filteredList = this.todoList
+    this.filteredList = this.meetupsList
     .slice(0)
     .filter((item) => item[type].includes(searchValue));
   }
 
   getId() {
-    return this.todoList[this.todoList.length - 1].id + 1;
+    return this.meetupsList[this.meetupsList.length - 1].id + 1;
   }
 }

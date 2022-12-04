@@ -1,0 +1,46 @@
+<div class="meetup-card">
+  <div class="meetup-card-body">
+    <header class="meetup-card-body__header">
+      <h2 class="meetup-card-body__title">
+        {{ meetup.title }}
+      </h2>
+      <span
+        class="meetup-card-body__status"
+        [ngClass]="{
+          important: meetup.status === 'important',
+          completed: meetup.status === 'completed'
+        }"
+      >
+        {{ meetup.status }}</span
+      >
+    </header>
+    <p class="meetup-card-body__description">{{ meetup.description }}</p>
+  </div>
+
+  <div class="meetup-card-controls">
+    <button
+      class="meetup-card-controls__delete-button"
+      (click)="handleClickDelete.emit(meetup.id)"
+    >
+      Delete
+    </button>
+
+    <div class="meetup-card-controls__status">
+      <button
+        *ngIf="isHideChangeStatuses"
+        class="meetup-card-controls__status-button"
+        (click)="isHideChangeStatuses = !isHideChangeStatuses"
+      >
+        Change status
+      </button>
+      <div
+        *ngIf="!isHideChangeStatuses"
+        class="meetup-card-controls__status-toogle-buttons"
+      >
+        <button (click)="changeStatus(meetup.id, 'normal')">Обычный</button>
+        <button (click)="changeStatus(meetup.id, 'important')">Важный</button>
+        <button (click)="changeStatus(meetup.id, 'completed')">Выполненный</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,23 +5,17 @@ import { FormsModule }   from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TodoItemComponent } from './components/todo-item/todo-item.component';
-import { TodoListComponent } from './components/todo-list/todo-list.component';
-import { CreateElemComponent } from './components/create-elem/create-elem.component';
-import { SearchComponent } from './components/search/search.component';
+import { MyMeetupsModule } from './pages/my-meetups/my-meetups.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    TodoItemComponent,
-    TodoListComponent,
-    CreateElemComponent,
-    SearchComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    MyMeetupsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

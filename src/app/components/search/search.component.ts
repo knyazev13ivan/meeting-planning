@@ -1,5 +1,10 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
+export interface ISearch {
+  searchValue: string;
+  type: 'title' | 'descrition' | 'status'
+}
+
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -8,13 +13,15 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class SearchComponent {
   constructor() {}
 
-  searchValue: string = ''
-  type: 'title' | 'descrition' | 'status' = 'title'
+  searchState: ISearch = {
+    searchValue: '',
+    type: 'title'
+  }
 
   @Output()
   public handleChangeSearch = new EventEmitter()
 
-  getSearchParams(value: string, type: 'title' | 'descrition' | 'status') {
-    this.handleChangeSearch.emit({searchValue: value, type: type})
+  getSearchParams(searchState: ISearch) {
+    this.handleChangeSearch.emit(searchState)
   }
 }
