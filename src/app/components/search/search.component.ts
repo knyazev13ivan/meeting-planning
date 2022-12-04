@@ -2,7 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 
 export interface ISearch {
   searchValue: string;
-  type: 'title' | 'descrition' | 'status'
+  type: 'title' | 'description' | 'status'
 }
 
 @Component({

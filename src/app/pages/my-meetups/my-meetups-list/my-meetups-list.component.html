@@ -1,5 +1,5 @@
 <div class="meetups-list">
-  <app-search (handleChangeSearch)="this.getFilteredList($event)"></app-search>
+  <app-search (handleChangeSearch)="searchState = $event"></app-search>
 
   <app-meetup-form
     (handleClickCreate)="add($event)"
@@ -7,7 +7,7 @@
 
   <ul class="meetups-list__list" >
     <app-meetup-card
-      *ngFor="let meetup of this.filteredList; trackBy: trackByItems"
+      *ngFor="let meetup of meetupsList | filterMeetups: searchState; trackBy: trackByItems"
       [meetup]="meetup"
       (handleClickDelete)="delete($event)"
       (handleClickChangeStatus)="changeStatus($event)"

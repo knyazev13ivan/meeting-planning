@@ -42,35 +42,20 @@ export class MeetupsListService {
     },
   ];
   
-  filteredList = this.meetupsList;
-
   constructor() {}
 
   delete(id: number): void {
-    this.filteredList = this.filteredList.filter((item) => item.id !== id);
+    this.meetupsList = this.meetupsList.filter((item) => item.id !== id);
   }
 
   add(item: Pick<IMeetupItem, 'title' | 'description' | 'status'>): void {
-    this.filteredList.push({ id: this.getId(), ...item });
+    this.meetupsList.push({ id: this.getId(), ...item });
   }
 
   changeStatus({ id, status }: Pick<IMeetupItem, 'id' | 'status'>): void {
-    const item = this.filteredList.find((item) => item.id === id);
+    const item = this.meetupsList.find((item) => item.id === id);
 
     if (item) item.status = status;
-  }
-
-  getFilteredList({
-    searchValue,
-    type,
-  }: {
-    searchValue: string;
-    type: 'title' | 'description' | 'status';
-  }) {
-    
-    this.filteredList = this.meetupsList
-    .slice(0)
-    .filter((item) => item[type].includes(searchValue));
   }
 
   getId() {

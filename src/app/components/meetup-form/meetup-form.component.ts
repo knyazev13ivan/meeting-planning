@@ -20,7 +20,7 @@ export class MeetupFormComponent {
   @Output()
   public handleClickCreate = new EventEmitter();
 
-  createNewMeetapp() {
+  createNewMeetup() {
     if (this.meetup.title) {
       this.handleClickCreate.emit(this.meetup);
       this.isCreateMode = !this.isCreateMode;

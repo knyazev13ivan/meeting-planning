@@ -13,8 +13,8 @@ export class MeetupCardComponent {
 
   private _meetup!: IMeetupItem;
 
-  @Input() set meetup(todoItem: IMeetupItem) {
-    this._meetup = todoItem;
+  @Input() set meetup(meetup: IMeetupItem) {
+    this._meetup = meetup;
   }
   get meetup(): IMeetupItem {
     return this._meetup;
