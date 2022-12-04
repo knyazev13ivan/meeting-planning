@@ -6,6 +6,7 @@ import { FormsModule }   from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MyMeetupsModule } from './pages/my-meetups/my-meetups.module';
+import { AuthModule } from './pages/auth/auth.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { MyMeetupsModule } from './pages/my-meetups/my-meetups.module';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    MyMeetupsModule
+    MyMeetupsModule,
+    AuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
