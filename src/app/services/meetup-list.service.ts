@@ -41,7 +41,7 @@ export class MeetupsListService {
       status: 'normal',
     },
   ];
-  
+
   constructor() {}
 
   delete(id: number): void {

@@ -22,10 +22,10 @@ export class MyMeetupsListComponent {
   }
 
   set meetupsList(meetups: IMeetupItem[]) {
-    this._meetupsList = meetups
+    this._meetupsList = meetups;
   }
   get meetupsList(): IMeetupItem[] {
-    return this._meetupsList
+    return this._meetupsList;
   }
 
   set searchState(searchState: ISearch) {

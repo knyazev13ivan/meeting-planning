@@ -4,7 +4,7 @@ import { IMeetupItem } from 'src/app/services/meetup-list.service';
 @Component({
   selector: 'app-meetup-form',
   templateUrl: './meetup-form.component.html',
-  styleUrls: ['./meetup-form.component.scss']
+  styleUrls: ['./meetup-form.component.scss'],
 })
 export class MeetupFormComponent {
   constructor() {}

@@ -1,17 +1,17 @@
 <div class="meetups-list">
   <app-search (handleChangeSearch)="searchState = $event"></app-search>
 
-  <app-meetup-form
-    (handleClickCreate)="add($event)"
-  ></app-meetup-form>
+  <app-meetup-form (handleClickCreate)="add($event)"></app-meetup-form>
 
-  <ul class="meetups-list__list" >
+  <ul class="meetups-list__list">
     <app-meetup-card
-      *ngFor="let meetup of meetupsList | filterMeetups: searchState; trackBy: trackByItems"
+      *ngFor="
+        let meetup of meetupsList | filterMeetups : searchState;
+        trackBy: trackByItems
+      "
       [meetup]="meetup"
       (handleClickDelete)="delete($event)"
       (handleClickChangeStatus)="changeStatus($event)"
-      
     ></app-meetup-card>
   </ul>
 </div>

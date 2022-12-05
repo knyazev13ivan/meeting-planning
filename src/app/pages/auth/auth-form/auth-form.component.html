@@ -1,15 +1,23 @@
 <div class="auth-form">
-  <input type="text" class="auth-form__login-input" placeholder="Login" />
+  <input
+    type="text"
+    class="auth-form__login-input"
+    placeholder="Login"
+    [(ngModel)]="email"
+  />
   <input
     type="password"
     class="auth-form__password-input"
     placeholder="Password"
+    [(ngModel)]="password"
   />
 
   <div class="login-field">
     <div class="login-field__create-account">
       <a href="#">How to create account?</a>
     </div>
-    <button type="button" class="login-field__login-button">Login</button>
+    <button (click)="login()" type="button" class="login-field__login-button">
+      Login
+    </button>
   </div>
 </div>

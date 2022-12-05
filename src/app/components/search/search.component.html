@@ -1,9 +1,16 @@
 <div class="search">
-  <input [(ngModel)]="searchState.searchValue" type="text" class="search__input" placeholder="Поиск"/>
+  <input
+    [(ngModel)]="searchState.searchValue"
+    type="text"
+    class="search__input"
+    placeholder="Поиск"
+  />
   <select [(ngModel)]="searchState.type" name="type" class="search__filter">
     <option [value]="'title'">В названии</option>
     <option [value]="'description'">В описании</option>
     <option [value]="'status'">По важности</option>
   </select>
-  <button class="search__button" (click)="getSearchParams(searchState)">Поиск</button>
+  <button class="search__button" (click)="getSearchParams(searchState)">
+    Поиск
+  </button>
 </div>

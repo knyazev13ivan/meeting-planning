@@ -13,7 +13,7 @@
     height: 30px;
     margin-bottom: 20px;
     padding: 9px 12px;
-    
+
     border: 1px solid $input-bg-color;
     border-bottom: 1px solid $second-color;
     border-radius: 4px;
@@ -39,6 +39,7 @@
 
   &__create-account {
     width: 150px;
+
     a {
       color: $completed-color;
     }
