@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -7,12 +8,14 @@ import { AuthService } from 'src/app/services/auth.service';
   styleUrls: ['./auth-form.component.scss'],
 })
 export class AuthFormComponent {
-  email: string = '';
-  password: string = '';
+  email: string = 'admin1@mail.ru';
+  password: string = 'password';
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private routes: Router) {}
 
   login() {
-    this.authService.login(this.email, this.password);
+    this.authService.login(this.email, this.password).subscribe(() => {
+      this.routes.navigate(['my-meetups']);
+    });
   }
 }

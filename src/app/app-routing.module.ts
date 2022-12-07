@@ -7,7 +7,7 @@ import { MyMeetupsListComponent } from './pages/my-meetups/my-meetups-list/my-me
 
 const routes: Routes = [
   { path: '', component: AboutComponent },
-  { path: 'auth', component: AuthFormComponent },
+  { path: 'auth/login', component: AuthFormComponent },
   {
     path: 'my-meetups',
     component: MyMeetupsListComponent,

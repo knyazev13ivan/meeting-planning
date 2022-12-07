@@ -1,5 +1,5 @@
 export const environment = {
   production: false,
 
-  backendOrigin: 'http://localhost:3333/',
+  backendOrigin: 'https://api.fit-meetups.ru',
 };

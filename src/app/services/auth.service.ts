@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
   providedIn: 'root',
 })
 export class AuthService {
-  baseUrl: string = `${environment}/auth`;
+  baseUrl: string = `${environment.backendOrigin}/auth`;
 
   constructor(private http: HttpClient, private routes: Router) {}
 
@@ -41,11 +41,19 @@ export class AuthService {
     return token;
   }
 
-  login(login: string, password: string) {
+  login(email: string, password: string) {
+    console.log('login in service, email: ', email, ', password: ', password);
+    console.log(this.baseUrl);
+    console.log({ email, password });
+    
+    
+
     return this.http
-      .post<{ token: string }>(`${this.baseUrl}/login`, { login, password })
+      .post<{ token: string }>(`${this.baseUrl}/login`, { email, password })
       .pipe(
         map((res) => {
+          console.log(res);
+          
           if (res.token) {
             localStorage.setItem('del_meetups_auth_token', res.token);
           }
@@ -56,6 +64,6 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('del_meetups_auth_token');
-    this.routes.navigate(['login']);
+    this.routes.navigate(['auth/login']);
   }
 }
