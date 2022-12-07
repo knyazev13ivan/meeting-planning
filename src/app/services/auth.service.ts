@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../environments/environments';
-import { map, Observable, of } from 'rxjs';
+import { map } from 'rxjs';
 import { Router } from '@angular/router';
 
 export interface IRole {
@@ -65,16 +65,10 @@ export class AuthService {
   }
 
   login(email: string, password: string) {
-    console.log('login in service, email: ', email, ', password: ', password);
-    console.log(this.baseUrl);
-    console.log({ email, password });
-
     return this.http
       .post<{ token: string }>(`${this.baseUrl}/login`, { email, password })
       .pipe(
         map((res) => {
-          console.log(res);
-
           if (res.token) {
             localStorage.setItem('del_meetups_auth_token', res.token);
           }

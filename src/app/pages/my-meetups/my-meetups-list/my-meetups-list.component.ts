@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ISearch } from 'src/app/components/search/search.component';
 import {
   IMeetupItem,
@@ -10,7 +10,7 @@ import {
   templateUrl: './my-meetups-list.component.html',
   styleUrls: ['./my-meetups-list.component.scss'],
 })
-export class MyMeetupsListComponent {
+export class MyMeetupsListComponent implements OnInit {
   _meetupsList: IMeetupItem[];
   _searchState: ISearch = {
     searchValue: '',
@@ -19,6 +19,12 @@ export class MyMeetupsListComponent {
 
   constructor(public meetupsListService: MeetupsListService) {
     this._meetupsList = meetupsListService.meetupsList;
+  }
+
+  ngOnInit(): void {
+    this.meetupsListService
+      .getMeetups()
+      .subscribe((data) => this.meetupsList = data);
   }
 
   set meetupsList(meetups: IMeetupItem[]) {

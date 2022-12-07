@@ -1,4 +1,6 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, tap } from 'rxjs';
 
 export interface IMeetupItem {
   id: number;
@@ -11,38 +13,16 @@ export interface IMeetupItem {
   providedIn: 'root',
 })
 export class MeetupsListService {
-  meetupsList: IMeetupItem[] = [
-    {
-      id: 0,
-      title: 'Обычный митап',
-      description:
-        'Не имеет особой важности. Имеет очень длинное описание, которое лишено смысла, но нужно для наполнения контентом данного блока информаций о митапе.',
-      status: 'normal',
-    },
-    {
-      id: 1,
-      title: 'Очень важный митап',
-      description:
-        'Крайне важный митап. Имеет очень длинное описание, которое лишено смысла, но нужно для наполнения контентом данного блока информаций о митапе.',
-      status: 'important',
-    },
-    {
-      id: 2,
-      title: 'Митап, который уже завершился',
-      description:
-        'Митап прошел. Имеет очень длинное описание, которое лишено смысла, но нужно для наполнения контентом данного блока информаций о митапе.',
-      status: 'completed',
-    },
-    {
-      id: 3,
-      title: 'Еще один митап',
-      description:
-        'Нужно больше митапов. Имеет очень длинное описание, которое лишено смысла, но нужно для наполнения контентом данного блока информаций о митапе.',
-      status: 'normal',
-    },
-  ];
+  meetupsList: IMeetupItem[] = [];
+  meetupsUrl = '../../assets/meetups-list.json';
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
+
+  getMeetups(): Observable<IMeetupItem[]> {
+    return this.http
+      .get<IMeetupItem[]>(this.meetupsUrl)
+      .pipe(tap((meetups) => (this.meetupsList = meetups)));
+  }
 
   delete(id: number): void {
     this.meetupsList = this.meetupsList.filter((item) => item.id !== id);
