@@ -60,3 +60,28 @@
     }
   }
 }
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  &__email {
+    padding: 20px;
+    font-size: 2em;
+  }
+
+  .roles-list {
+    list-style: none;
+    align-self: flex-start;
+
+    &__caption {
+      font-size: 1.7em;
+    }
+  }
+
+  &__logout-button {
+    margin: 20px;
+  }
+}

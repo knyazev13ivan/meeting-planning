@@ -4,11 +4,34 @@ import { environment } from '../environments/environments';
 import { map, Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
 
+export interface IRole {
+  id: number;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+  UserRole: {
+    createdAt: string;
+    id: number;
+    roleId: number;
+    updatedAt: string;
+    userId: number;
+  };
+}
+
+export interface IUser {
+  email: string;
+  exp: number;
+  iat: number;
+  id: number;
+  roles: IRole[];
+}
+
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   baseUrl: string = `${environment.backendOrigin}/auth`;
+  _user: IUser | null = null;
 
   constructor(private http: HttpClient, private routes: Router) {}
 
@@ -30,8 +53,8 @@ export class AuthService {
   public get user(): any {
     const token = this.token;
     if (token) {
-      const user: any = this.parseJwt(token);
-      return user;
+      this._user = this.parseJwt(token);
+      return this._user;
     }
     return null;
   }
@@ -45,15 +68,13 @@ export class AuthService {
     console.log('login in service, email: ', email, ', password: ', password);
     console.log(this.baseUrl);
     console.log({ email, password });
-    
-    
 
     return this.http
       .post<{ token: string }>(`${this.baseUrl}/login`, { email, password })
       .pipe(
         map((res) => {
           console.log(res);
-          
+
           if (res.token) {
             localStorage.setItem('del_meetups_auth_token', res.token);
           }
@@ -64,6 +85,7 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem('del_meetups_auth_token');
+    this._user = null;
     this.routes.navigate(['auth/login']);
   }
 }

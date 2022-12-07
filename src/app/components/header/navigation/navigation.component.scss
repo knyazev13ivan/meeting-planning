@@ -6,23 +6,35 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin: 30px;
 
   &-list {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: 4center;
     align-items: center;
     list-style: none;
 
     &__elem {
-      margin-right: 20px;
-
+      // margin-right: 20px;
+      
       a {
-        padding: 7px 9px;
+        display: inline-block;
+        // outline: 1px solid orangered; outline-offset: -1px;
+        padding: 7px 24px;
+        border-radius: 5px;
         color: $completed-color;
+        font-weight: bold;
+        font-size: 1.4em;
 
-        font-size: 1.3em;
+        &:hover {
+          background-color: rgb(44, 54, 47);
+        }
+        &:active {
+          background-color: rgb(66, 82, 71);
+        }
       }
     }
+
   }
 }

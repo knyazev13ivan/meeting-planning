@@ -10,6 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class AuthFormComponent {
   email: string = 'admin1@mail.ru';
   password: string = 'password';
+  user = this.authService.user;
 
   constructor(private authService: AuthService, private routes: Router) {}
 
@@ -17,5 +18,10 @@ export class AuthFormComponent {
     this.authService.login(this.email, this.password).subscribe(() => {
       this.routes.navigate(['my-meetups']);
     });
+  }
+
+  logout() {
+    this.authService.logout();
+    this.user = null
   }
 }

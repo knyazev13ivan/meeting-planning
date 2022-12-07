@@ -1,23 +1,35 @@
-<div class="auth-form">
-  <input
-    type="text"
-    class="auth-form__login-input"
-    placeholder="Login"
-    [(ngModel)]="email"
-  />
-  <input
-    type="password"
-    class="auth-form__password-input"
-    placeholder="Password"
-    [(ngModel)]="password"
-  />
+<div class="auth">
+  <div *ngIf="!user" class="auth-form">
+    <input
+      type="text"
+      class="auth-form__login-input"
+      placeholder="Login"
+      [(ngModel)]="email"
+    />
+    <input
+      type="password"
+      class="auth-form__password-input"
+      placeholder="Password"
+      [(ngModel)]="password"
+    />
 
-  <div class="login-field">
-    <div class="login-field__create-account">
-      <a href="#">How to create account?</a>
+    <div class="login-field">
+      <div class="login-field__create-account">
+        <a href="#">How to create account?</a>
+      </div>
+      <button (click)="login()" type="button" class="login-field__login-button">
+        Login
+      </button>
     </div>
-    <button (click)="login()" type="button" class="login-field__login-button">
-      Login
-    </button>
+  </div>
+  <div *ngIf="user" class="user-info">
+    <h2 class="user-info__email">{{ user.email }}</h2>
+    <ul class="roles-list">
+      <h3 class="roles-list__caption">roles:</h3>
+      <li class="roles-list__role" *ngFor="let role of user.roles">
+        {{ role.name }}
+      </li>
+    </ul>
+    <button (click)="logout()" class="user-info__logout-button">Log Out</button>
   </div>
 </div>
