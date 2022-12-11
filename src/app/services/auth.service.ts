@@ -52,6 +52,7 @@ export class AuthService {
 
   public get user(): any {
     const token = this.token;
+
     if (token) {
       this._user = this.parseJwt(token);
       return this._user;
