@@ -1,9 +1,9 @@
 <nav class="nav">
   <ul class="nav-list">
-    <li class="nav-list__elem home"><a routerLink="/">Home</a></li>
-    <li class="nav-list__elem auth"><a routerLink="/auth/login">Auth</a></li>
-    <li class="nav-list__elem my-meetups">
-      <a routerLink="/my-meetups">My meetups</a>
+    <li class="nav-list__elem home"><a routerLink="/home" routerLinkActive="active-link">Home</a></li>
+    <li class="nav-list__elem auth"><a routerLink="/auth/login" routerLinkActive="active-link">Auth</a></li>
+    <li *ngIf="user" class="nav-list__elem my-meetups">
+      <a routerLink="/my-meetups" routerLinkActive="active-link">My meetups</a>
     </li>
   </ul>
 </nav>

@@ -28,6 +28,21 @@ export class MeetupsListService {
     this.meetupsList = this.meetupsList.filter((item) => item.id !== id);
   }
 
+  // add(
+  //   item: Pick<IMeetupItem, 'title' | 'description' | 'status'>
+  // ): Observable<IMeetupItem> {
+  //   return this.http
+  //     .post<IMeetupItem>(this.meetupsUrl, { id: this.getId(), ...item })
+  //     .pipe(
+  //       tap((meetup) => {
+  //         console.log(meetup);
+  //         console.log(this.meetupsList);
+          
+  //         this.meetupsList.push(meetup);
+  //       })
+  //     );
+  // }
+
   add(item: Pick<IMeetupItem, 'title' | 'description' | 'status'>): void {
     this.meetupsList.push({ id: this.getId(), ...item });
   }

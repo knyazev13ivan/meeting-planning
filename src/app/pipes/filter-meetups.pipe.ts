@@ -7,8 +7,9 @@ import { ISearch } from '../components/search/search.component';
 })
 export class FilterMeetupsPipe implements PipeTransform {
   transform(meetups: IMeetupItem[], searchState: ISearch): IMeetupItem[] {
-    return meetups.filter((meetup) => {
-      if (searchState.searchValue.length === 0) return meetups;
+    if (searchState.searchValue.length === 0) return meetups;
+
+    return meetups.slice(0).filter((meetup) => {
       return meetup[searchState.type].includes(searchState.searchValue);
     });
   }

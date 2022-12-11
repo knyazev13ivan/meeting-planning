@@ -1,10 +1,17 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+} from '@angular/core';
 import { IMeetupItem } from 'src/app/services/meetup-list.service';
 
 @Component({
   selector: 'app-meetup-card',
   templateUrl: './meetup-card.component.html',
   styleUrls: ['./meetup-card.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MeetupCardComponent {
   constructor() {}

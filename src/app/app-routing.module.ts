@@ -6,7 +6,8 @@ import { AboutComponent } from './pages/home/about/about.component';
 import { MyMeetupsListComponent } from './pages/my-meetups/my-meetups-list/my-meetups-list.component';
 
 const routes: Routes = [
-  { path: '', component: AboutComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full'},
+  { path: 'home', component: AboutComponent },
   { path: 'auth/login', component: AuthFormComponent },
   {
     path: 'my-meetups',
@@ -18,6 +19,5 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [AuthGuard],
 })
 export class AppRoutingModule {}

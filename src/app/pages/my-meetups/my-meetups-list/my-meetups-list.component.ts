@@ -1,4 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  Component,
+  DoCheck,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { ISearch } from 'src/app/components/search/search.component';
 import {
   IMeetupItem,
@@ -10,7 +16,7 @@ import {
   templateUrl: './my-meetups-list.component.html',
   styleUrls: ['./my-meetups-list.component.scss'],
 })
-export class MyMeetupsListComponent implements OnInit {
+export class MyMeetupsListComponent implements OnInit{
   _meetupsList: IMeetupItem[];
   _searchState: ISearch = {
     searchValue: '',
@@ -24,7 +30,7 @@ export class MyMeetupsListComponent implements OnInit {
   ngOnInit(): void {
     this.meetupsListService
       .getMeetups()
-      .subscribe((data) => this.meetupsList = data);
+      .subscribe((data) => (this.meetupsList = data));
   }
 
   set meetupsList(meetups: IMeetupItem[]) {
@@ -44,6 +50,9 @@ export class MyMeetupsListComponent implements OnInit {
   delete = this.meetupsListService.delete;
 
   add = this.meetupsListService.add;
+  // add(item: Pick<IMeetupItem, 'title' | 'description' | 'status'>) {
+  //   this.meetupsListService.add(item).subscribe();
+  // }
 
   changeStatus = this.meetupsListService.changeStatus;
 
