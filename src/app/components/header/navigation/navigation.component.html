@@ -6,6 +6,9 @@
     <li class="nav-list__elem auth">
       <a routerLink="/auth/login" routerLinkActive="active-link">Auth</a>
     </li>
+    <li *ngIf="user" class="nav-list__elem all-meetups">
+      <a routerLink="/all-meetups" routerLinkActive="active-link">All meetups</a>
+    </li>
     <li *ngIf="user" class="nav-list__elem my-meetups">
       <a routerLink="/my-meetups" routerLinkActive="active-link">My meetups</a>
     </li>

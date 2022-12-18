@@ -16,7 +16,7 @@ export class AuthFormComponent {
 
   login() {
     this.authService.login(this.email, this.password).subscribe(() => {
-      this.routes.navigate(['my-meetups']);
+      this.routes.navigate(['all-meetups']);
     });
   }
 

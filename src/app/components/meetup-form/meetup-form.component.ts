@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-import { IMeetupItem } from 'src/app/services/meetup-list.service';
+import { ICreatedMeetupDto } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-meetup-form',
@@ -11,21 +11,23 @@ export class MeetupFormComponent {
 
   isCreateMode = false;
 
-  meetup: Pick<IMeetupItem, 'title' | 'description' | 'status'> = {
-    title: '',
+  meetup: ICreatedMeetupDto = {
+    name: '',
     description: '',
-    status: 'normal',
+    time: '',
+    duration: 0,
+    location: '',
+    target_audience: '',
+    need_to_know: '',
+    will_happen: '',
+    reason_to_come: '',
   };
 
   @Output()
   public handleClickCreate = new EventEmitter();
 
   createNewMeetup() {
-    if (this.meetup.title) {
-      this.handleClickCreate.emit(this.meetup);
-      this.isCreateMode = !this.isCreateMode;
-      this.meetup.title = '';
-      this.meetup.description = '';
-    }
+    this.handleClickCreate.emit(this.meetup);
+    this.isCreateMode = !this.isCreateMode;
   }
 }

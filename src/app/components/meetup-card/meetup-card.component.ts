@@ -5,7 +5,7 @@ import {
   Input,
   Output,
 } from '@angular/core';
-import { IMeetupItem } from 'src/app/services/meetup-list.service';
+import { IMeetup } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-meetup-card',
@@ -18,12 +18,12 @@ export class MeetupCardComponent {
 
   isHideChangeStatuses = true;
 
-  private _meetup!: IMeetupItem;
+  private _meetup!: IMeetup;
 
-  @Input() set meetup(meetup: IMeetupItem) {
+  @Input() set meetup(meetup: IMeetup) {
     this._meetup = meetup;
   }
-  get meetup(): IMeetupItem {
+  get meetup(): IMeetup {
     return this._meetup;
   }
 

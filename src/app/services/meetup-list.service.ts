@@ -1,59 +1,45 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, tap } from 'rxjs';
-
-export interface IMeetupItem {
-  id: number;
-  title: string;
-  description: string;
-  status: 'normal' | 'important' | 'completed';
-}
+import { ICreatedMeetupDto, IMeetup, ISubscribeMeetupDto } from '../interfaces';
+import { environment } from 'src/environments/environments';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MeetupsListService {
-  meetupsList: IMeetupItem[] = [];
-  meetupsUrl = '../../assets/meetups-list.json';
+  meetupsList: IMeetup[] = [];
+  meetupsUrl: string = `${environment.backendOrigin}/meetup`;
 
   constructor(private http: HttpClient) {}
 
-  getMeetups(): Observable<IMeetupItem[]> {
+  getMeetups(): Observable<IMeetup[]> {
     return this.http
-      .get<IMeetupItem[]>(this.meetupsUrl)
+      .get<IMeetup[]>(this.meetupsUrl)
       .pipe(tap((meetups) => (this.meetupsList = meetups)));
   }
 
-  delete(id: number): void {
-    this.meetupsList = this.meetupsList.filter((item) => item.id !== id);
+  createMeetup(meetup: ICreatedMeetupDto): void {
+    this.http.post<ICreatedMeetupDto>(this.meetupsUrl, meetup);
   }
 
-  // add(
-  //   item: Pick<IMeetupItem, 'title' | 'description' | 'status'>
-  // ): Observable<IMeetupItem> {
-  //   return this.http
-  //     .post<IMeetupItem>(this.meetupsUrl, { id: this.getId(), ...item })
-  //     .pipe(
-  //       tap((meetup) => {
-  //         console.log(meetup);
-  //         console.log(this.meetupsList);
-
-  //         this.meetupsList.push(meetup);
-  //       })
-  //     );
-  // }
-
-  add(item: Pick<IMeetupItem, 'title' | 'description' | 'status'>): void {
-    this.meetupsList.push({ id: this.getId(), ...item });
+  subscribeUser({ idMeetup, idUser }: ISubscribeMeetupDto): void {
+    this.http.put(this.meetupsUrl, { idMeetup, idUser });
   }
 
-  changeStatus({ id, status }: Pick<IMeetupItem, 'id' | 'status'>): void {
-    const item = this.meetupsList.find((item) => item.id === id);
-
-    if (item) item.status = status;
+  unsubscribeUser({ idMeetup, idUser }: ISubscribeMeetupDto): void {
+    this.http.delete(this.meetupsUrl, { body: { idMeetup, idUser } });
   }
 
-  getId() {
-    return this.meetupsList[this.meetupsList.length - 1].id + 1;
+  changeMeetup(meetup: ICreatedMeetupDto, id: number) {
+    this.http.put(`${this.meetupsUrl}/${id}`, meetup);
+  }
+
+  deleteMeetup(id: string) {
+    this.http.delete(this.meetupsUrl, {
+      params: {
+        id,
+      },
+    });
   }
 }
