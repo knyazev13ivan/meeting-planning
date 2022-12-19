@@ -10,19 +10,20 @@ import { MeetupsService } from 'src/app/services/meetups.service';
 })
 export class AllMeetupsListComponent implements OnInit, OnDestroy {
   _meetupsList: IMeetup[];
+  _user: IUser | null = null;
   meetupsListSubscription$!: Subscription;
+  isHideMeetupForm: boolean = false;
   _searchState: ISearch = {
     searchValue: '',
     type: 'title',
   };
-  _user: IUser | null = null;
 
   constructor(public meetupsService: MeetupsService) {
     this._meetupsList = meetupsService.meetupsList;
   }
 
   ngOnInit(): void {
-    this.meetupsService
+    this.meetupsListSubscription$ = this.meetupsService
       .getMeetups()
       .subscribe((data) => (this.meetupsList = data));
   }
@@ -43,6 +44,10 @@ export class AllMeetupsListComponent implements OnInit, OnDestroy {
   }
   get searchState(): ISearch {
     return this._searchState;
+  }
+
+  toggleViewMeetupForm() {
+    this.isHideMeetupForm = !this.isHideMeetupForm;
   }
 
   trackByItems(index: number, item: IMeetup): number {

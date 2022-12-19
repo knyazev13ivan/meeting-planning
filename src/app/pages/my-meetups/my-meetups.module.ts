@@ -6,10 +6,17 @@ import { MyMeetupsListComponent } from './my-meetups-list/my-meetups-list.compon
 import { SearchComponent } from 'src/app/components/search/search.component';
 import { MeetupCardModule } from 'src/app/components/meetup-card/meetup-card.module';
 import { FilterMeetupsModule } from 'src/app/pipes/filter-meetups.module';
+import { MeetupFormModule } from 'src/app/components/meetup-form/meetup-form.module';
 
 @NgModule({
   declarations: [MyMeetupsListComponent, SearchComponent],
-  imports: [CommonModule, FormsModule, MeetupCardModule, FilterMeetupsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    MeetupCardModule,
+    FilterMeetupsModule,
+    MeetupFormModule,
+  ],
   exports: [MyMeetupsListComponent],
 })
 export class MyMeetupsModule {}

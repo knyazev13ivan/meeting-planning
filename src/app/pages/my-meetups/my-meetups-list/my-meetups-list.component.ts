@@ -11,12 +11,14 @@ import { MeetupsService } from 'src/app/services/meetups.service';
 })
 export class MyMeetupsListComponent implements OnInit, OnDestroy {
   _meetupsList!: IMeetup[];
+  _user!: IAuthUser;
   meetupsListSubscription$!: Subscription;
+  // isHideMeetupForm: boolean = false;
+  isHideMeetupForm: boolean = true;
   _searchState: ISearch = {
     searchValue: '',
     type: 'title',
   };
-  _user!: IAuthUser;
 
   constructor(
     private meetupsService: MeetupsService,
@@ -36,7 +38,7 @@ export class MyMeetupsListComponent implements OnInit, OnDestroy {
       .subscribe((meetup) => {
         this.meetupsList.push(meetup);
 
-        console.log(this.meetupsList);
+        // console.log(this.meetupsList);
       });
   }
 
@@ -63,6 +65,10 @@ export class MyMeetupsListComponent implements OnInit, OnDestroy {
   }
   get searchState(): ISearch {
     return this._searchState;
+  }
+
+  toggleViewMeetupForm() {
+    this.isHideMeetupForm = !this.isHideMeetupForm;
   }
 
   trackByItems(index: number, item: IMeetup): number {

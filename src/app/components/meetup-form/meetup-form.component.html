@@ -1,38 +1,104 @@
-<div class="create-modul">
-  <button
-    type="button"
-    class="create-modul__button"
-    (click)="isCreateMode = !isCreateMode"
-  >
-    {{ isCreateMode ? "Отмена" : "Добавить новый митап" }}
-  </button>
+<div *ngIf="isCreateMode" class="meetup-form-modul">
+  <form [formGroup]="meetupForm" class="form" (submit)="createNewMeetup()">
+    <label class="form__label" for="name"
+      >Название:
+      <input
+        type="text"
+        class="form__input-text"
+        id="name"
+        formControlName="name"
+      />
+    </label>
 
-  <div *ngIf="isCreateMode" class="create-modul-form">
-    <label class="create-modul-form__label-text-field" for="titleInput">
-      <span class="create-modul-form__label-text">Название</span>
+    <div class="date-time-block">
+      <label class="form__label" for="date"
+        >Дата:
+        <input
+          type="date"
+          class="form__input-date"
+          id="date"
+          formControlName="date"
+        />
+      </label>
+      <label class="form__label" for="time"
+        >Время:
+        <input
+          type="time"
+          class="form__input-time"
+          id="time"
+          formControlName="time"
+        />
+      </label>
+    </div>
+
+    <label class="form__label" for="location"
+      >Место:
       <input
-        [(ngModel)]="meetup.name"
         type="text"
-        class="create-modul-form__input"
-        name="title"
-        id="titleInput"
+        class="form__input-text"
+        id="location"
+        formControlName="location"
       />
     </label>
-    <label class="create-modul-form__label-text-field" for="descriptionInput">
-      <span class="create-modul-form__label-text">Описание</span>
+
+    <label class="form__label" for="duration"
+      >Продолжительность:
       <input
-        [(ngModel)]="meetup.description"
         type="text"
-        class="create-modul-form__input"
+        class="form__input-text"
+        id="duration"
+        formControlName="duration"
+      />
+    </label>
+
+    <label class="form__label" for="description"
+      >Описание:
+      <textarea
+        class="form__textarea"
+        id="description"
         name="description"
-        id="descriptionInput"
-      />
+        formControlName="description"
+      ></textarea>
     </label>
-    <button
-      class="create-modul-form__create-button"
-      (click)="createNewMeetup()"
-    >
-      Создать
+
+    <label class="form__label" for="target-audience"
+      >Целевая аудитория:
+      <textarea
+        class="form__textarea"
+        id="target-audience"
+        formControlName="target_audience"
+      ></textarea>
+    </label>
+
+    <label class="form__label" for="need-to-know"
+      >Что надо знать:
+      <textarea
+        class="form__textarea"
+        id="need-to-know"
+        formControlName="need_to_know"
+      ></textarea>
+    </label>
+
+    <label class="form__label" for="will-happen"
+      >Что будет:
+      <textarea
+        class="form__textarea"
+        id="will-happen"
+        formControlName="will_happen"
+      ></textarea>
+    </label>
+
+    <label class="form__label" for="reason_to_come"
+      >Почему надо обязательно прийти:
+      <textarea
+        class="form__textarea"
+        id="reason_to_come"
+        formControlName="reason_to_come"
+      ></textarea>
+    </label>
+
+    <button class="form__create-button" type="submit">
+      {{ meetupForEdit ? "Изменить" : "Создать" }}
     </button>
-  </div>
+  </form>
 </div>
