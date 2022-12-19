@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Output } from '@angular/core';
-import { AuthService, IUser } from './services/auth.service';
+import { IAuthUser } from './interfaces';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,7 @@ import { AuthService, IUser } from './services/auth.service';
 })
 export class AppComponent {
   title = 'meeting-planning';
-  _user: IUser | null = null;
+  _user: IAuthUser | null = null;
 
   constructor(public authService: AuthService) {}
 
@@ -17,10 +18,10 @@ export class AppComponent {
     this._user = this.authService.user;
   }
 
-  set user(user: IUser | null) {
+  set user(user: IAuthUser | null) {
     this._user = user;
   }
-  get user(): IUser | null {
+  get user(): IAuthUser | null {
     return this._user;
   }
 }

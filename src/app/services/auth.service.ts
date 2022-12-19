@@ -3,35 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from '../../environments/environments';
 import { map } from 'rxjs';
 import { Router } from '@angular/router';
-
-export interface IRole {
-  id: number;
-  name: string;
-  createdAt: string;
-  updatedAt: string;
-  UserRole: {
-    createdAt: string;
-    id: number;
-    roleId: number;
-    updatedAt: string;
-    userId: number;
-  };
-}
-
-export interface IUser {
-  email: string;
-  exp: number;
-  iat: number;
-  id: number;
-  roles: IRole[];
-}
+import { IAuthUser } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   baseUrl: string = `${environment.backendOrigin}/auth`;
-  _user: IUser | null = null;
+  _user: IAuthUser | null = null;
 
   constructor(private http: HttpClient, private routes: Router) {}
 

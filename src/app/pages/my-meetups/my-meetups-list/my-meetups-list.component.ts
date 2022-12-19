@@ -1,48 +1,55 @@
-import {
-  Component,
-  Input,
-  OnInit,
-} from '@angular/core';
-import { filter } from 'rxjs';
-import { ISearch } from 'src/app/components/search/search.component';
-import { IMeetup, IUser } from 'src/app/interfaces';
-import {
-  MeetupsListService,
-} from 'src/app/services/meetup-list.service';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { filter, from, map, mergeMap, Subscription, tap } from 'rxjs';
+import { IAuthUser, IMeetup, ISearch } from 'src/app/interfaces';
+import { AuthService } from 'src/app/services/auth.service';
+import { MeetupsService } from 'src/app/services/meetups.service';
 
 @Component({
   selector: 'app-my-meetups-list',
   templateUrl: './my-meetups-list.component.html',
   styleUrls: ['./my-meetups-list.component.scss'],
 })
-export class MyMeetupsListComponent implements OnInit{
-  _meetupsList: IMeetup[];
+export class MyMeetupsListComponent implements OnInit, OnDestroy {
+  _meetupsList!: IMeetup[];
+  meetupsListSubscription$!: Subscription;
   _searchState: ISearch = {
     searchValue: '',
     type: 'title',
   };
-  _user: IUser | null = null
+  _user!: IAuthUser;
 
-  constructor(public meetupsListService: MeetupsListService) {
-    this._meetupsList = meetupsListService.meetupsList;
+  constructor(
+    private meetupsService: MeetupsService,
+    private authService: AuthService
+  ) {
+    this.meetupsList = meetupsService.meetupsList;
+    this.user = authService.user;
   }
 
   ngOnInit(): void {
-    this.meetupsListService
+    this.meetupsListSubscription$ = this.meetupsService
       .getMeetups()
       .pipe(
-        // filter((meetup: IMeetup ) => )
+        mergeMap((meetups: IMeetup[]) => from(meetups)),
+        filter((meetup: IMeetup) => meetup.owner.id === this.user.id)
       )
-      .subscribe((data) => (this.meetupsList = data));
+      .subscribe((meetup) => {
+        this.meetupsList.push(meetup);
+
+        console.log(this.meetupsList);
+      });
   }
 
-  // @Input() set user(user: IUser | null) {
-  //   this._user = user;
-  //   if (user !== null) this.roles = user.roles.map((role: IRole) => role.name);
-  // }
-  // get user(): IUser | null {
-  //   return this._user;
-  // }
+  ngOnDestroy(): void {
+    this.meetupsListSubscription$.unsubscribe();
+  }
+
+  @Input() set user(user: IAuthUser) {
+    this._user = user;
+  }
+  get user(): IAuthUser {
+    return this._user;
+  }
 
   set meetupsList(meetups: IMeetup[]) {
     this._meetupsList = meetups;

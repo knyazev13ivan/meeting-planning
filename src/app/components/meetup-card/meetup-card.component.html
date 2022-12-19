@@ -1,19 +1,56 @@
 <div class="meetup-card">
-  <div class="meetup-card-body">
-    <header class="meetup-card-body__header">
-      <h2 class="meetup-card-body__title">
-        {{ meetup.name }}
-      </h2>
-    </header>
-    <p class="meetup-card-body__description">{{ meetup.description }}</p>
+  <div class="header">
+    <h3 class="header__name">{{ meetup.name }}</h3>
+    <div class="header__aside">
+      <p class="header__time">{{ meetup.time | date : "dd.MM.YY, HH:mm" }}</p>
+    </div>
   </div>
 
-  <div class="meetup-card-controls">
-    <button
-      class="meetup-card-controls__delete-button"
-      (click)="handleClickDelete.emit(meetup.id)"
-    >
-      Delete
-    </button>
+  <div class="body">
+    <p class="body__description">{{ meetup.description }}</p>
+
+    <div *ngIf="isHideFullView" class="full-view">
+      <div class="sub-section">
+        <h4 class="sub-section__title">Целевая аудитория</h4>
+        <p class="sub-section__description">{{ meetup.target_audience }}</p>
+      </div>
+      <div class="sub-section">
+        <h4 class="sub-section__title">Что надо знать,</h4>
+        <p class="sub-section__description">{{ meetup.need_to_know }}</p>
+      </div>
+      <div class="sub-section">
+        <h4 class="sub-section__title">Чтот будет?</h4>
+        <p class="sub-section__description">{{ meetup.will_happen }}</p>
+      </div>
+      <div class="sub-section">
+        <h4 class="sub-section__title">Почему надо обязательно прийти?</h4>
+        <p class="sub-section__description">{{ meetup.reason_to_come }}</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="author">
+      <img src="#" class="author__icon" alt="author" />
+      <p class="author__fio">{{ meetup.owner.fio }}</p>
+    </div>
+
+    <div *ngIf="isActual" class="controls">
+      <button *ngIf="isMyMeetup" class="controls__edit-btn">
+        Редактировать
+      </button>
+      <button *ngIf="!isMyMeetup" class="controls__subscribe-btn">
+        <ng-template *ngIf="isSubscribed">Я пойду!</ng-template>
+        <ng-template *ngIf="!isSubscribed">Не смогу пойти</ng-template>
+      </button>
+    </div>
+
+    <div class="toogle-full-description">
+      <img
+        src="#"
+        class="toogle-full-description__icon"
+        alt="toogle-full-description"
+      />
+    </div>
   </div>
 </div>

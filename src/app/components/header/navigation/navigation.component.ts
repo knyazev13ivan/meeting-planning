@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { IRole, IUser } from 'src/app/services/auth.service';
+import { IAuthRole, IAuthUser } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-navigation',
@@ -8,14 +8,15 @@ import { IRole, IUser } from 'src/app/services/auth.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavigationComponent {
-  _user: IUser | null = null;
+  _user: IAuthUser | null = null;
   roles: string[] = [''];
 
-  @Input() set user(user: IUser | null) {
+  @Input() set user(user: IAuthUser | null) {
     this._user = user;
-    if (user !== null) this.roles = user.roles.map((role: IRole) => role.name);
+    if (user !== null)
+      this.roles = user.roles.map((role: IAuthRole) => role.name);
   }
-  get user(): IUser | null {
+  get user(): IAuthUser | null {
     return this._user;
   }
 }

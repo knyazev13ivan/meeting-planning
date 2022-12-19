@@ -1,9 +1,5 @@
 import { Component, EventEmitter, Output } from '@angular/core';
-
-export interface ISearch {
-  searchValue: string;
-  type: 'title' | 'description' | 'status';
-}
+import { ISearch } from 'src/app/interfaces';
 
 @Component({
   selector: 'app-search',

@@ -7,8 +7,8 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { IAuthRole } from '../interfaces';
 import { AuthService } from '../services/auth.service';
-import { IRole } from '../services/auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -26,7 +26,9 @@ export class UsersGuard implements CanActivate {
     | UrlTree {
     if (
       this.authService.user &&
-      this.authService.user.roles.find((role: IRole) => role.name === 'ADMIN')
+      this.authService.user.roles.find(
+        (role: IAuthRole) => role.name === 'ADMIN'
+      )
     ) {
       return true;
     } else {

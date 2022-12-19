@@ -1,1 +1,14 @@
-<p>all-meetups-list works!</p>
+<div class="meetups-list">
+  <!-- <app-meetup-form (handleClickCreate)="add($event)"></app-meetup-form> -->
+
+  <ul class="meetups-list__list">
+    <app-meetup-card
+      *ngFor="
+        let meetup of meetupsList | filterMeetups : searchState;
+        trackBy: trackByItems
+      "
+      [meetup]="meetup"
+      [isMyMeetup]="false"
+    ></app-meetup-card>
+  </ul>
+</div>

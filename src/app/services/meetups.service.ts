@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environments';
 @Injectable({
   providedIn: 'root',
 })
-export class MeetupsListService {
+export class MeetupsService {
   meetupsList: IMeetup[] = [];
   meetupsUrl: string = `${environment.backendOrigin}/meetup`;
 

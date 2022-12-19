@@ -67,3 +67,30 @@ export interface ISubscribeMeetupDto {
   idMeetup: number;
   idUser: number;
 }
+
+export interface IAuthRole {
+  id: number;
+  name: string;
+  createdAt: string;
+  updatedAt: string;
+  UserRole: {
+    createdAt: string;
+    id: number;
+    roleId: number;
+    updatedAt: string;
+    userId: number;
+  };
+}
+
+export interface IAuthUser {
+  email: string;
+  exp: number;
+  iat: number;
+  id: number;
+  roles: IAuthRole[];
+}
+
+export interface ISearch {
+  searchValue: string;
+  type: 'title' | 'description' | 'status';
+}

@@ -1,6 +1,5 @@
 import { Pipe, PipeTransform } from '@angular/core';
-import { ISearch } from '../components/search/search.component';
-import { IMeetup } from '../interfaces';
+import { IMeetup, ISearch } from '../interfaces';
 
 @Pipe({
   name: 'filterMeetups',

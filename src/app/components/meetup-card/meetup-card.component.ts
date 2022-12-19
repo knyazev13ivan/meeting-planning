@@ -16,9 +16,10 @@ import { IMeetup } from 'src/app/interfaces';
 export class MeetupCardComponent {
   constructor() {}
 
-  isHideChangeStatuses = true;
-
   private _meetup!: IMeetup;
+  isHideFullView: boolean = true;
+  isActual: boolean = true;
+  isSubscribed: boolean = false;
 
   @Input() set meetup(meetup: IMeetup) {
     this._meetup = meetup;
@@ -27,15 +28,12 @@ export class MeetupCardComponent {
     return this._meetup;
   }
 
+  @Input() isMyMeetup: boolean = false;
+
   @Output()
   public handleClickDelete = new EventEmitter();
 
-  @Output()
-  public handleClickChangeStatus = new EventEmitter();
-
-  changeStatus(id: number, status: string) {
-    this.handleClickChangeStatus.emit({ id, status });
-
-    this.isHideChangeStatuses = !this.isHideChangeStatuses;
+  changeView() {
+    this.isHideFullView = !this.isHideFullView;
   }
 }
