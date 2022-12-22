@@ -67,8 +67,6 @@ export class MyMeetupsListComponent implements OnInit, OnDestroy {
   }
 
   setMeetupForChange(meetup: IMeetup) {
-    
-    
     this.meetupForChange = meetup;
     this.currentMeetupId = meetup.id;
     

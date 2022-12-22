@@ -1,103 +1,108 @@
 <div *ngIf="isCreateMode" class="meetup-form-modul">
+  <h2 class="meetup-form-modul__title">Создание митапа</h2>
   <form [formGroup]="meetupForm" class="form" (submit)="createNewMeetup()">
-    <label class="form__label" for="name"
-      >Название:
+    <div class="field">
+      <label class="field__label" for="name">Название:</label>
       <input
         type="text"
-        class="form__input-text"
+        class="field__input-text"
         id="name"
         formControlName="name"
       />
-    </label>
+    </div>
 
     <div class="date-time-block">
-      <label class="form__label" for="date"
-        >Дата:
+      <div class="field">
+        <label class="field__label" for="date">Дата:</label>
         <input
           type="date"
-          class="form__input-date"
+          class="field__input-date"
           id="date"
           formControlName="date"
         />
-      </label>
-      <label class="form__label" for="time"
-        >Время:
+      </div>
+      <div class="field">
+        <label class="field__label label-time" for="time">Время:</label>
         <input
           type="time"
-          class="form__input-time"
+          class="field__input-time"
           id="time"
           formControlName="time"
         />
-      </label>
+      </div>
     </div>
 
-    <label class="form__label" for="location"
-      >Место:
+    <div class="field">
+      <label class="field__label" for="location">Место:</label>
       <input
         type="text"
-        class="form__input-text"
+        class="field__input-text"
         id="location"
         formControlName="location"
       />
-    </label>
+    </div>
 
-    <label class="form__label" for="duration"
-      >Продолжительность:
+    <div class="field">
+      <label class="field__label" for="duration">Продолжительность:</label>
       <input
         type="text"
-        class="form__input-text"
+        class="field__input-text"
         id="duration"
         formControlName="duration"
       />
-    </label>
+    </div>
 
-    <label class="form__label" for="description"
-      >Описание:
+    <div class="field">
+      <label class="field__label" for="description">Описание:</label>
       <textarea
-        class="form__textarea"
+        class="field__textarea"
         id="description"
         name="description"
         formControlName="description"
       ></textarea>
-    </label>
+    </div>
 
-    <label class="form__label" for="target-audience"
-      >Целевая аудитория:
+    <div class="field">
+      <label class="field__label" for="target-audience"
+        >Целевая аудитория:</label
+      >
       <textarea
-        class="form__textarea"
+        class="field__textarea"
         id="target-audience"
         formControlName="target_audience"
       ></textarea>
-    </label>
+    </div>
 
-    <label class="form__label" for="need-to-know"
-      >Что надо знать:
+    <div class="field">
+      <label class="field__label" for="need-to-know">Что надо знать:</label>
       <textarea
-        class="form__textarea"
+        class="field__textarea"
         id="need-to-know"
         formControlName="need_to_know"
       ></textarea>
-    </label>
+    </div>
 
-    <label class="form__label" for="will-happen"
-      >Что будет:
+    <div class="field">
+      <label class="field__label" for="will-happen">Что будет:</label>
       <textarea
-        class="form__textarea"
+        class="field__textarea"
         id="will-happen"
         formControlName="will_happen"
       ></textarea>
-    </label>
+    </div>
 
-    <label class="form__label" for="reason_to_come"
-      >Почему надо обязательно прийти:
+    <div class="field">
+      <label class="field__label" for="reason_to_come"
+        >Почему надо обязательно прийти:</label
+      >
       <textarea
-        class="form__textarea"
+        class="field__textarea"
         id="reason_to_come"
         formControlName="reason_to_come"
       ></textarea>
-    </label>
+    </div>
 
-    <button class="form__create-button" type="submit">
+    <button class="form__create-btn" type="submit">
       {{ meetupForEdit ? "Изменить" : "Создать" }}
     </button>
   </form>

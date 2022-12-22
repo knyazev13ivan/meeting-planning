@@ -12,7 +12,7 @@
   </ul>
 
   <app-meetup-form
-    [isCreateMode]="!isHideMeetupForm"
+    [isCreateMode]="isHideMeetupForm"
     [meetupForEdit]="meetupForChange"
     (handleClickCreate)="createMeetup($event)"
     (handleClickChange)="changeMeetup($event, currentMeetupId)"

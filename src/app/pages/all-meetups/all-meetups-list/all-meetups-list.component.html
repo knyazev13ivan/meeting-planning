@@ -6,7 +6,7 @@
         trackBy: trackByItems
       "
       [meetup]="meetup"
-      [isMyMeetup]="true"
+      [isMyMeetup]="false"
     ></app-meetup-card>
   </ul>
 
@@ -17,7 +17,7 @@
 
   <div class="footer">
     <button class="footer__create-meetup-btn" (click)="toggleViewMeetupForm()">
-      {{ isHideMeetupForm ? "Создать митап" : "Отмена"}}
+      {{ isHideMeetupForm ? "Создать митап" : "Отмена" }}
     </button>
   </div>
 </div>

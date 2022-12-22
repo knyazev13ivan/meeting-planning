@@ -41,8 +41,8 @@
         Редактировать
       </button>
       <button *ngIf="!isMyMeetup" (click)="toogleSub()" class="controls__subscribe-btn">
-        <span *ngIf="isSubscribed">Я пойду!</span>
-        <span *ngIf="!isSubscribed">Не смогу пойти</span>
+        <span *ngIf="!isSubscribed">Я пойду!</span>
+        <span *ngIf="isSubscribed">Не смогу пойти</span>
       </button>
       <div class="toogle-full-description">
         <button class="toogle-full-description__btn" (click)="changeView()">
