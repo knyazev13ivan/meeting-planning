@@ -5,7 +5,7 @@
   <ul *ngIf="isHideMeetupForm" class="meetups-list__list">
     <app-meetup-card
       *ngFor="
-        let meetup of meetupsList | filterMeetups : searchState;
+        let meetup of meetupsList | filterMeetups: searchState;
         trackBy: trackByItems
       "
       [meetup]="meetup"

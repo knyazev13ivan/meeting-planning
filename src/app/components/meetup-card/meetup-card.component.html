@@ -42,17 +42,20 @@
       <button
         *ngIf="isMyMeetup"
         (click)="handleClickSetMeetup.emit()"
-        class="controls__edit-btn"
+        class="edit-btn"
       >
         Редактировать
       </button>
       <button
         *ngIf="!isMyMeetup"
+        [ngClass]="{
+          'subscribe-btn__go': !isSubscribed,
+          'subscribe-btn__not-go': isSubscribed
+        }"
         (click)="toogleSub()"
-        class="controls__subscribe-btn"
+        class="subscribe-btn"
       >
-        <span *ngIf="!isSubscribed">Я пойду!</span>
-        <span *ngIf="isSubscribed">Не смогу пойти</span>
+        {{ isSubscribed ? "Не смогу пойти" : "Я пойду!" }}
       </button>
       <div class="toogle-full-description">
         <button class="toogle-full-description__btn" (click)="changeView()">

@@ -67,11 +67,12 @@ export class MyMeetupsListComponent implements OnInit, OnDestroy {
   }
 
   changeMeetup(meetup: ICreatedMeetupDto, id: number) {
-    console.log('meetup: ', meetup);
     this.meetupsService.changeMeetup(meetup, id).subscribe((meetup) => {
       console.log(meetup);
       this.meetupsList.push(meetup);
     });
+
+    this.toggleViewMeetupForm();
   }
 
   createMeetup(meetup: ICreatedMeetupDto) {

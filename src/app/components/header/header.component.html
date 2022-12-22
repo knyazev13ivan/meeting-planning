@@ -26,11 +26,18 @@
   </nav>
 
   <div class="auth-controls">
-    <img
+    <a
+      *ngIf="user"
       class="auth-controls__item settings"
-      src="assets/images/settings.png"
-      alt="Настройки"
-    />
+      routerLink="/settings"
+      routerLinkActive="active-link"
+    >
+      <img
+        class="auth-controls__item settings"
+        src="assets/images/settings.png"
+        alt="Настройки"
+      />
+    </a>
     <a
       class="auth-controls__item login"
       routerLink="/auth/login"

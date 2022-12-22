@@ -62,11 +62,11 @@ export class AllMeetupsListComponent implements OnInit, DoCheck, OnDestroy {
   }
 
   createMeetup(meetup: ICreatedMeetupDto) {
-    console.log('create?');
-
     this.meetupsService
       .createMeetup(meetup)
       .subscribe((meetup) => this.meetupsList.push(meetup));
+
+    this.toggleViewMeetupForm();
   }
 
   subscribe(idMeetup: number) {
