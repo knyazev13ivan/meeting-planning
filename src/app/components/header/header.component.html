@@ -1,0 +1,49 @@
+<header class="header">
+  <div class="logos">
+    <a class="logos__home-link" routerLink="/home"> MeetUps </a>
+    <div class="logos__group">
+      <img src="assets/images/it-logo.png" alt="ИТ-Философия" />
+      <img src="assets/images/liga-logo.png" alt="Лига Цифровой Экономики" />
+    </div>
+  </div>
+
+  <nav class="nav">
+    <ul class="nav-list">
+      <li *ngIf="user" class="nav-list__elem all-meetups">
+        <a routerLink="/all-meetups" routerLinkActive="active-link"
+          >Все митапы</a
+        >
+      </li>
+      <li *ngIf="user" class="nav-list__elem my-meetups">
+        <a routerLink="/my-meetups" routerLinkActive="active-link"
+          >Мои митапы</a
+        >
+      </li>
+      <li *ngIf="user && roles.includes('ADMIN')" class="nav-list__elem users">
+        <a routerLink="/users" routerLinkActive="active-link">Пользователи</a>
+      </li>
+    </ul>
+  </nav>
+
+  <div class="auth-controls">
+    <img
+      class="auth-controls__item settings"
+      src="assets/images/settings.png"
+      alt="Настройки"
+    />
+    <a
+      class="auth-controls__item login"
+      routerLink="/auth/login"
+      routerLinkActive="active-link"
+    >
+      <img *ngIf="!user" src="assets/images/login.png" alt="Войти" />
+    </a>
+    <img
+      class="auth-controls__item logout"
+      *ngIf="user"
+      (click)="logout()"
+      src="assets/images/logout.png"
+      alt="Выйти"
+    />
+  </div>
+</header>

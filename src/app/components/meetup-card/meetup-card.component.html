@@ -1,8 +1,9 @@
 <div class="meetup-card">
   <div class="header">
     <h3 class="header__name">{{ meetup.name }}</h3>
-    <div class="header__aside">
-      <p class="header__time">{{ meetup.time | date : "dd.MM.YY, HH:mm" }}</p>
+    <div class="header-aside">
+      <p class="header-aside__time">{{ meetup.time | date : "dd.MM.YY, HH:mm" }}</p>
+      <p class="header-aside__location">{{meetup.location}}</p>
     </div>
   </div>
 
@@ -31,26 +32,35 @@
 
   <div class="footer">
     <div class="author">
-      <img src="#" class="author__icon" alt="author" />
-      <p class="author__fio">{{ meetup.owner.fio }}</p>
+      <img src="assets/images/login.png" class="author__icon" alt="author" />
+      <span class="author__fio">{{ meetup.owner.fio }}</span>
     </div>
 
     <div *ngIf="isActual" class="controls">
-      <button *ngIf="isMyMeetup" class="controls__edit-btn">
+      <button *ngIf="isMyMeetup" (click)="handleClickSetMeetup.emit()" class="controls__edit-btn">
         Редактировать
       </button>
-      <button *ngIf="!isMyMeetup" class="controls__subscribe-btn">
-        <ng-template *ngIf="isSubscribed">Я пойду!</ng-template>
-        <ng-template *ngIf="!isSubscribed">Не смогу пойти</ng-template>
+      <button *ngIf="!isMyMeetup" (click)="toogleSub()" class="controls__subscribe-btn">
+        <span *ngIf="isSubscribed">Я пойду!</span>
+        <span *ngIf="!isSubscribed">Не смогу пойти</span>
       </button>
+      <div class="toogle-full-description">
+        <button class="toogle-full-description__btn" (click)="changeView()">
+          <img
+          *ngIf="isHideFullView"
+          src="assets/images/arrow-down.png"
+          class="toogle-full-description__icon"
+          alt="toogle-full-description"
+          />
+          <img
+          *ngIf="!isHideFullView"
+          src="assets/images/arrow-up.png"
+          class="toogle-full-description__icon"
+          alt="toogle-full-description"
+          />
+        </button>
+      </div>
     </div>
 
-    <div class="toogle-full-description">
-      <img
-        src="#"
-        class="toogle-full-description__icon"
-        alt="toogle-full-description"
-      />
-    </div>
   </div>
 </div>

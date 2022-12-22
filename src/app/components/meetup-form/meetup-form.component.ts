@@ -1,4 +1,13 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DoCheck,
+  EventEmitter,
+  Input,
+  OnChanges,
+  OnInit,
+  Output,
+} from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -11,14 +20,17 @@ import { ICreatedMeetupDto, IMeetup } from 'src/app/interfaces';
   selector: 'app-meetup-form',
   templateUrl: './meetup-form.component.html',
   styleUrls: ['./meetup-form.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MeetupFormComponent implements OnInit {
+export class MeetupFormComponent implements OnInit, OnChanges {
   constructor(private fb: FormBuilder) {}
 
   @Input() isCreateMode: boolean = false;
-  @Input() meetupForEdit?: IMeetup;
+  @Input() meetupForEdit?: ICreatedMeetupDto | null;
 
-  ngOnInit(): void {
+  ngOnInit(): void {}
+
+  ngOnChanges(): void {
     this.initForm();
   }
 
@@ -47,11 +59,11 @@ export class MeetupFormComponent implements OnInit {
       ],
       date: [
         this.meetupForEdit?.time?.slice(0, 10) || '',
-        [Validators.required, Validators.pattern(/\d+\.\d+\.\d+/)],
+        [Validators.required, Validators.pattern(/^\d+\.\d+\.\d+$/)],
       ],
       time: [
         this.meetupForEdit?.time?.slice(11, 16) || '',
-        [Validators.required, Validators.pattern(/\d+:\d+/)],
+        [Validators.required, Validators.pattern(/^\d+:\d+$/)],
       ],
       duration: [
         this.meetupForEdit?.duration || 0,
@@ -83,6 +95,9 @@ export class MeetupFormComponent implements OnInit {
   @Output()
   public handleClickCreate = new EventEmitter();
 
+  @Output()
+  public handleClickChange = new EventEmitter();
+
   createNewMeetup() {
     const meetup: ICreatedMeetupDto = {
       name: this.meetupForm.value.name || '',
@@ -100,7 +115,12 @@ export class MeetupFormComponent implements OnInit {
 
     console.log(meetup);
 
-    // this.handleClickCreate.emit(meetup);
+    if (this.meetupForEdit) {
+      this.handleClickChange.emit(meetup);
+    } else {
+      this.handleClickCreate.emit(meetup);
+    }
+
     this.isCreateMode = false;
   }
 }

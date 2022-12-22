@@ -1,6 +1,4 @@
-import { ChangeDetectionStrategy, Component, Output } from '@angular/core';
-import { IAuthUser } from './interfaces';
-import { AuthService } from './services/auth.service';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -10,18 +8,6 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent {
   title = 'meeting-planning';
-  _user: IAuthUser | null = null;
 
-  constructor(public authService: AuthService) {}
-
-  ngDoCheck(): void {
-    this._user = this.authService.user;
-  }
-
-  set user(user: IAuthUser | null) {
-    this._user = user;
-  }
-  get user(): IAuthUser | null {
-    return this._user;
-  }
+  constructor() {}
 }

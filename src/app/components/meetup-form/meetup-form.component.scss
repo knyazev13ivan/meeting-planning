@@ -1,0 +1,16 @@
+.meetup-form-modul {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 90px;
+  padding: 14px 18px;
+  border: 0.3px solid var(--primary-color);
+  background-color: var(--default-color);
+
+  .form {
+    &__label {
+      font-size: 18px;
+      line-height: 25px;
+      color: var(--bold-color);
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { IMeetup, ISearch, IUser } from 'src/app/interfaces';
+import { ICreatedMeetupDto, IMeetup, ISearch, IUser } from 'src/app/interfaces';
 import { MeetupsService } from 'src/app/services/meetups.service';
 
 @Component({
@@ -9,18 +9,16 @@ import { MeetupsService } from 'src/app/services/meetups.service';
   styleUrls: ['./all-meetups-list.component.scss'],
 })
 export class AllMeetupsListComponent implements OnInit, OnDestroy {
-  _meetupsList: IMeetup[];
+  _meetupsList!: IMeetup[];
   _user: IUser | null = null;
   meetupsListSubscription$!: Subscription;
-  isHideMeetupForm: boolean = false;
+  isHideMeetupForm: boolean = true;
   _searchState: ISearch = {
     searchValue: '',
     type: 'title',
   };
 
-  constructor(public meetupsService: MeetupsService) {
-    this._meetupsList = meetupsService.meetupsList;
-  }
+  constructor(public meetupsService: MeetupsService) {}
 
   ngOnInit(): void {
     this.meetupsListSubscription$ = this.meetupsService
@@ -44,6 +42,12 @@ export class AllMeetupsListComponent implements OnInit, OnDestroy {
   }
   get searchState(): ISearch {
     return this._searchState;
+  }
+
+  createMeetup(meetup: ICreatedMeetupDto) {
+    console.log('create?');
+
+    this.meetupsService.createMeetup(meetup);
   }
 
   toggleViewMeetupForm() {

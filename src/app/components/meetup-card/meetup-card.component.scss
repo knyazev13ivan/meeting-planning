@@ -1,65 +1,141 @@
-@import "../../../variables.scss";
-
 .meetup-card {
   display: flex;
-  flex-direction: row;
-  margin-bottom: 10px;
-  padding: 5px 10px;
-  background-color: #303038;
-  border-radius: 5px;
+  flex-direction: column;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  background-color: var(--default-color);
+  border: 0.3px solid var(--primary-color);
 
-  &-body {
-    width: 600px;
-    padding-right: 15px;
-
-    &__header {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid #bbbbbb;
-    }
-
-    &__title {
-      padding: 5px;
-      font-weight: bold;
-    }
-
-    &__status {
-      display: inline-block;
-      padding: 2px 4px;
-      border-radius: 3px;
-      font-size: 1.2em;
-      font-weight: bold;
-    }
-
-    &__description {
-      padding: 5px;
-      font-style: italic;
-    }
-  }
-
-  &-controls {
+  .header {
     display: flex;
-    flex-direction: column;
-    padding-bottom: 5px;
+    justify-content: space-between;
+    margin-bottom: 10px;
 
-    &__status-toogle-buttons {
+    &__name {
+      display: flex;
+      align-items: center;
+      font-family: 'Cherry Bomb Regular';
+      font-size: 24px;
+      line-height: 24px;
+      color: var(--bold-color);
+    }
+
+    &-aside {
       display: flex;
       flex-direction: column;
+
+      &__time {
+        display: flex;
+        align-items: center;
+        font-family: 'Cherry Bomb Regular';
+        font-size: 24px;
+        line-height: 24px;
+        color: var(--bold-color);
+      }
+
+      &__location {
+        font-size: 14px;
+        line-height: 19px;
+        color: var(--bold-color);
+      }
+    }
+  }
+
+  .body {
+    &__description {
+      margin-bottom: 20px;
+      font-size: 18px;
+      line-height: 25px;
+      color: var(--primary-color);
     }
 
-    button {
-      margin-top: 5px;
-      min-width: 170px;
+    .full-view {
+      .sub-section {
+        margin-bottom: 20px;
+
+        &__title {
+          margin-bottom: 4px;
+          font-size: 20px;
+          line-height: 27px;
+          color: var(--bold-color);
+        }
+
+        &__description {
+          font-size: 18px;
+          line-height: 25px;
+          color: var(--primary-color);
+        }
+      }
     }
   }
 
-  .important {
-    background-color: $important-color;
+  .footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+
+    .author {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      color: var(--bold-color);
+
+      &__icon {
+        width: 25px;
+        height: 25px;
+        margin-right: 10px;
+      }
+
+      &__fio {
+        font-size: 18px;
+        line-height: 25px;
+        color: var(--bold-color);
+      }
+    }
+
+    .controls {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      position: absolute;
+      bottom: -14px;
+      right: -18px;
+
+      &__edit-btn,
+      &__subscribe-btn {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        padding: 10px 15px;
+        margin-right: 14px;
+        height: 50px;
+        border: none;
+        border-radius: 5px;
+        background-color: var(--secondary-color);
+        box-shadow: 0px 4px 4px rgba(62, 5, 4, 0.25);
+        font-size: 18px;
+        line-height: 25px;
+        color: var(--bold-color);
+      }
+
+      .toogle-full-description {
+        &__btn {
+          display: flex;
+          align-items: center;
+          padding: 14px 20px;
+          border: none;
+          border-radius: 5px;
+          background-color: var(--accent-color);
+
+          &__icon {
+            width: 30px;
+            height: 23px;
+          }
+        }
+      }
+    }
   }
 
-  .completed {
-    background-color: $completed-color;
-  }
 }

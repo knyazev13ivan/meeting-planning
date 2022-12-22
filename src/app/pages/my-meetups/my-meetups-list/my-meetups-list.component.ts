@@ -1,6 +1,11 @@
 import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { filter, from, map, mergeMap, Subscription, tap } from 'rxjs';
-import { IAuthUser, IMeetup, ISearch } from 'src/app/interfaces';
+import {
+  IAuthUser,
+  ICreatedMeetupDto,
+  IMeetup,
+  ISearch,
+} from 'src/app/interfaces';
 import { AuthService } from 'src/app/services/auth.service';
 import { MeetupsService } from 'src/app/services/meetups.service';
 
@@ -13,7 +18,8 @@ export class MyMeetupsListComponent implements OnInit, OnDestroy {
   _meetupsList!: IMeetup[];
   _user!: IAuthUser;
   meetupsListSubscription$!: Subscription;
-  // isHideMeetupForm: boolean = false;
+  meetupForChange: ICreatedMeetupDto | null = null;
+  currentMeetupId!: number;
   isHideMeetupForm: boolean = true;
   _searchState: ISearch = {
     searchValue: '',
@@ -58,6 +64,24 @@ export class MyMeetupsListComponent implements OnInit, OnDestroy {
   }
   get meetupsList(): IMeetup[] {
     return this._meetupsList;
+  }
+
+  setMeetupForChange(meetup: IMeetup) {
+    
+    
+    this.meetupForChange = meetup;
+    this.currentMeetupId = meetup.id;
+    
+    this.isHideMeetupForm = false;
+  }
+  
+  changeMeetup(meetup: ICreatedMeetupDto, id: number) {
+    console.log('meetup: ', meetup);
+    this.meetupsService.changeMeetup(meetup, id);
+  }
+
+  createMeetup(meetup: ICreatedMeetupDto) {
+    this.meetupsService.createMeetup(meetup);
   }
 
   set searchState(searchState: ISearch) {

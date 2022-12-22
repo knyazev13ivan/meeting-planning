@@ -1,9 +1,36 @@
 @import "./variables.scss";
 
+:root {
+  --primary-color: #B4B4C0;
+  --background-color: #1E1E1E;
+  --default-color: #2C2C2C;
+  --accent-color: #B85526;
+  --secondary-color: #4C3F78;
+  --bold-color: #E9E9E9;
+  --create-color: #008697;
+}
+
+@font-face {
+  font-family: 'Cherry Bomb Regular';
+  src: url(assets/fonts/CherryBomb-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'Open Sans Hebrew Condensed Regular';
+  src: url(assets/fonts/OpenSansHebrewCondensed-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'Open Sans Hebrew Condensed Bold';
+  src: url(assets/fonts/OpenSansHebrewCondensed-Bold.ttf);
+}
+
 *,
 *::before,
 *::after {
   box-sizing: inherit;
+  margin: 0;
+  padding: 0;
 }
 
 html {
@@ -13,9 +40,9 @@ html {
 body {
   min-width: 320px;
   width: 100%;
-  font-family: "Century Gothic", sans-serif;
-  color: $text-color;
-  background-color: $bg-color;
+  font-family: 'Open Sans Hebrew Condensed Regular', sans-serif;
+  color: var(--text-color);
+  background-color: var(--background-color);
 
   -ms-overflow-style: none;
 
@@ -24,34 +51,21 @@ body {
   }
 }
 
-h1,
-h2,
-h3,
-h4,
-p {
-  margin: 0;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-}
-
 a {
   text-decoration: none;
 }
 
-button {
-  padding: 4px 7px;
-  border: 1px solid $second-color;
-  border-radius: 4px;
-  font-size: 1em;
-  font-weight: bold;
-  color: $second-color;
-  background-color: transparent;
-  cursor: pointer;
+// button {
+//   padding: 4px 7px;
+//   border: 1px solid $second-color;
+//   border-radius: 4px;
+//   font-size: 1em;
+//   font-weight: bold;
+//   color: $second-color;
+//   background-color: transparent;
+//   cursor: pointer;
 
-  &:hover {
-    background-color: $button-hover-color;
-  }
-}
+//   &:hover {
+//     background-color: $button-hover-color;
+//   }
+// }

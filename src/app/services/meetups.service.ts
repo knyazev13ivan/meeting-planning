@@ -20,6 +20,8 @@ export class MeetupsService {
   }
 
   createMeetup(meetup: ICreatedMeetupDto): void {
+    console.log('create? 2');
+    
     this.http.post<ICreatedMeetupDto>(this.meetupsUrl, meetup);
   }
 

@@ -1,5 +1,5 @@
 <div class="meetups-list">
-  <!-- <ul class="meetups-list__list">
+  <ul *ngIf="isHideMeetupForm" class="meetups-list__list">
     <app-meetup-card
       *ngFor="
         let meetup of meetupsList | filterMeetups : searchState;
@@ -7,15 +7,20 @@
       "
       [meetup]="meetup"
       [isMyMeetup]="true"
+      (handleClickSetMeetup)="setMeetupForChange(meetup)"
     ></app-meetup-card>
-  </ul> -->
+  </ul>
 
   <app-meetup-form
-    *ngFor="let meetup of meetupsList"
-    [meetupForEdit]="meetup"
-    [isCreateMode]="isHideMeetupForm"
+    [isCreateMode]="!isHideMeetupForm"
+    [meetupForEdit]="meetupForChange"
+    (handleClickCreate)="createMeetup($event)"
+    (handleClickChange)="changeMeetup($event, currentMeetupId)"
   ></app-meetup-form>
-  <button class="create-meetup-btn" (click)="toggleViewMeetupForm()">
-    {{ isHideMeetupForm ? "Отмена" : "Создать митап" }}
-  </button>
+
+  <div class="footer">
+    <button class="footer__create-meetup-btn" (click)="toggleViewMeetupForm()">
+      {{ isHideMeetupForm ? "Создать митап" : "Отмена" }}
+    </button>
+  </div>
 </div>

@@ -31,7 +31,11 @@ export class MeetupCardComponent {
   @Input() isMyMeetup: boolean = false;
 
   @Output()
-  public handleClickDelete = new EventEmitter();
+  public handleClickSetMeetup = new EventEmitter();
+
+  toogleSub() {
+    this.isSubscribed = !this.isSubscribed;
+  }
 
   changeView() {
     this.isHideFullView = !this.isHideFullView;
