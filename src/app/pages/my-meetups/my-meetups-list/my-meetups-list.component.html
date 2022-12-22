@@ -1,4 +1,6 @@
 <div class="meetups-list">
+  <div *ngIf="!meetupsList.length" class="loading">loading</div>
+
   <ul *ngIf="isHideMeetupForm" class="meetups-list__list">
     <app-meetup-card
       *ngFor="
@@ -12,14 +14,18 @@
   </ul>
 
   <app-meetup-form
-    [isCreateMode]="isHideMeetupForm"
+    [isCreateMode]="!isHideMeetupForm"
     [meetupForEdit]="meetupForChange"
     (handleClickCreate)="createMeetup($event)"
     (handleClickChange)="changeMeetup($event, currentMeetupId)"
   ></app-meetup-form>
 
   <div class="footer">
-    <button class="footer__create-meetup-btn" (click)="toggleViewMeetupForm()">
+    <button
+      type="submit"
+      class="footer__create-meetup-btn"
+      (click)="toggleViewMeetupForm()"
+    >
       {{ isHideMeetupForm ? "Создать митап" : "Отмена" }}
     </button>
   </div>

@@ -15,10 +15,11 @@ import { MeetupsService } from 'src/app/services/meetups.service';
   styleUrls: ['./my-meetups-list.component.scss'],
 })
 export class MyMeetupsListComponent implements OnInit, OnDestroy {
-  _meetupsList!: IMeetup[];
+  meetupsList: IMeetup[] = [];
   _user!: IAuthUser;
-  meetupsListSubscription$!: Subscription;
-  meetupForChange: ICreatedMeetupDto | null = null;
+  meetupsList$!: Subscription;
+  // meetupForChange: ICreatedMeetupDto | null = null;
+  meetupForChange: any = null;
   currentMeetupId!: number;
   isHideMeetupForm: boolean = true;
   _searchState: ISearch = {
@@ -30,12 +31,11 @@ export class MyMeetupsListComponent implements OnInit, OnDestroy {
     private meetupsService: MeetupsService,
     private authService: AuthService
   ) {
-    this.meetupsList = meetupsService.meetupsList;
     this.user = authService.user;
   }
 
   ngOnInit(): void {
-    this.meetupsListSubscription$ = this.meetupsService
+    this.meetupsList$ = this.meetupsService
       .getMeetups()
       .pipe(
         mergeMap((meetups: IMeetup[]) => from(meetups)),
@@ -49,7 +49,7 @@ export class MyMeetupsListComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.meetupsListSubscription$.unsubscribe();
+    this.meetupsList$.unsubscribe();
   }
 
   @Input() set user(user: IAuthUser) {
@@ -59,27 +59,25 @@ export class MyMeetupsListComponent implements OnInit, OnDestroy {
     return this._user;
   }
 
-  set meetupsList(meetups: IMeetup[]) {
-    this._meetupsList = meetups;
-  }
-  get meetupsList(): IMeetup[] {
-    return this._meetupsList;
-  }
-
   setMeetupForChange(meetup: IMeetup) {
     this.meetupForChange = meetup;
     this.currentMeetupId = meetup.id;
-    
+
     this.isHideMeetupForm = false;
   }
-  
+
   changeMeetup(meetup: ICreatedMeetupDto, id: number) {
     console.log('meetup: ', meetup);
-    this.meetupsService.changeMeetup(meetup, id);
+    this.meetupsService.changeMeetup(meetup, id).subscribe((meetup) => {
+      console.log(meetup);
+      this.meetupsList.push(meetup);
+    });
   }
 
   createMeetup(meetup: ICreatedMeetupDto) {
-    this.meetupsService.createMeetup(meetup);
+    this.meetupsService
+      .createMeetup(meetup)
+      .subscribe((meetup) => console.log(meetup));
   }
 
   set searchState(searchState: ISearch) {

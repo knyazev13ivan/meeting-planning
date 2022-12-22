@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { BehaviorSubject, Observable, tap } from 'rxjs';
 import { ICreatedMeetupDto, IMeetup, ISubscribeMeetupDto } from '../interfaces';
 import { environment } from 'src/environments/environments';
 
@@ -8,37 +8,45 @@ import { environment } from 'src/environments/environments';
   providedIn: 'root',
 })
 export class MeetupsService {
-  meetupsList: IMeetup[] = [];
+  // meetupsList: IMeetup[] = [];
+  meetupsList: BehaviorSubject<IMeetup[]> = new BehaviorSubject<IMeetup[]>([]);
   meetupsUrl: string = `${environment.backendOrigin}/meetup`;
 
   constructor(private http: HttpClient) {}
 
   getMeetups(): Observable<IMeetup[]> {
-    return this.http
+    this.http
       .get<IMeetup[]>(this.meetupsUrl)
-      .pipe(tap((meetups) => (this.meetupsList = meetups)));
+      .subscribe((meetups) => this.meetupsList.next(meetups));
+    return this.meetupsList;
   }
 
-  createMeetup(meetup: ICreatedMeetupDto): void {
-    console.log('create? 2');
-    
-    this.http.post<ICreatedMeetupDto>(this.meetupsUrl, meetup);
+  createMeetup(meetup: ICreatedMeetupDto): Observable<IMeetup> {
+    return this.http.post<IMeetup>(this.meetupsUrl, meetup);
   }
 
-  subscribeUser({ idMeetup, idUser }: ISubscribeMeetupDto): void {
-    this.http.put(this.meetupsUrl, { idMeetup, idUser });
+  subscribeUser({
+    idMeetup,
+    idUser,
+  }: ISubscribeMeetupDto): Observable<IMeetup> {
+    return this.http.put<IMeetup>(this.meetupsUrl, { idMeetup, idUser });
   }
 
-  unsubscribeUser({ idMeetup, idUser }: ISubscribeMeetupDto): void {
-    this.http.delete(this.meetupsUrl, { body: { idMeetup, idUser } });
+  unsubscribeUser({
+    idMeetup,
+    idUser,
+  }: ISubscribeMeetupDto): Observable<IMeetup> {
+    return this.http.delete<IMeetup>(this.meetupsUrl, {
+      body: { idMeetup, idUser },
+    });
   }
 
-  changeMeetup(meetup: ICreatedMeetupDto, id: number) {
-    this.http.put(`${this.meetupsUrl}/${id}`, meetup);
+  changeMeetup(meetup: ICreatedMeetupDto, id: number): Observable<IMeetup> {
+    return this.http.put<IMeetup>(`${this.meetupsUrl}/${id}`, meetup);
   }
 
-  deleteMeetup(id: string) {
-    this.http.delete(this.meetupsUrl, {
+  deleteMeetup(id: string): Observable<IMeetup> {
+    return this.http.delete<IMeetup>(this.meetupsUrl, {
       params: {
         id,
       },

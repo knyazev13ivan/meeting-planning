@@ -12,9 +12,12 @@ import {
   FormBuilder,
   FormControl,
   FormGroup,
+  ValidationErrors,
   Validators,
 } from '@angular/forms';
-import { ICreatedMeetupDto, IMeetup } from 'src/app/interfaces';
+import { Observable } from 'rxjs';
+import { ICreatedMeetupDto } from 'src/app/interfaces';
+import { ValidationService } from 'src/app/services/validation.service';
 
 @Component({
   selector: 'app-meetup-form',
@@ -23,7 +26,7 @@ import { ICreatedMeetupDto, IMeetup } from 'src/app/interfaces';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MeetupFormComponent implements OnInit, OnChanges {
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder, private validation: ValidationService) {}
 
   @Input() isCreateMode: boolean = false;
   @Input() meetupForEdit?: ICreatedMeetupDto | null;
@@ -37,8 +40,8 @@ export class MeetupFormComponent implements OnInit, OnChanges {
   meetupForm!: FormGroup<{
     name: FormControl<string | null>;
     description: FormControl<string | null>;
-    date: FormControl<string | null>;
-    time: FormControl<string | null>;
+    date: FormControl<Date | null>;
+    time: FormControl<Date | null>;
     duration: FormControl<number | null>;
     location: FormControl<string | null>;
     target_audience: FormControl<string | null>;
@@ -47,64 +50,75 @@ export class MeetupFormComponent implements OnInit, OnChanges {
     reason_to_come: FormControl<string | null>;
   }>;
 
+  asyncValidator(control: FormControl): Observable<ValidationErrors> {
+    return this.validation.validateName(control.value);
+  }
+
   initForm() {
     this.meetupForm = this.fb.group({
       name: [
-        this.meetupForEdit?.name || '',
+        this.meetupForEdit?.name || 'supertest',
         [
           Validators.required,
           Validators.pattern(/^[ёЁА-яA-z\s\d\.\,\:\?\!\#\-\@\(\\'\")]+$/),
+          // this.asyncValidator.bind(this)
         ],
       ],
       description: [
-        this.meetupForEdit?.description || '',
+        this.meetupForEdit?.description || 'test',
         [
           Validators.required,
           Validators.pattern(/^[ёЁА-яA-z\s\d\.\,\:\?\!\#\-\@\(\\'\")]+$/),
         ],
       ],
       date: [
-        this.meetupForEdit?.time?.slice(0, 10) || '',
-        [Validators.required, Validators.pattern(/[^д]|[^м]|[^г]/g)],
+        this.meetupForEdit?.time || null,
+        [
+          Validators.required,
+          // Validators.pattern(/^[0-9]*[.]*[0-9]*[.]?[0-9]+$/),
+        ],
       ],
       time: [
-        this.meetupForEdit?.time?.slice(11, 16) || '',
-        [Validators.required, Validators.pattern(/^\d+:\d+$/)],
+        this.meetupForEdit?.time || null,
+        [
+          Validators.required,
+          // Validators.pattern(/^[0-9]*[.]*[0-9]*[.]?[0-9]+$/),
+        ],
       ],
       duration: [
-        this.meetupForEdit?.duration || 0,
+        this.meetupForEdit?.duration || 90,
         [Validators.required, Validators.pattern(/^\d+$/)],
       ],
       location: [
-        this.meetupForEdit?.location || '',
+        this.meetupForEdit?.location || 'test',
         [
           Validators.required,
           Validators.pattern(/^[ёЁА-яA-z\s\d\.\,\:\?\!\#\-\@\(\\'\")]+$/),
         ],
       ],
       target_audience: [
-        this.meetupForEdit?.target_audience || '',
+        this.meetupForEdit?.target_audience || 'test',
         [
           Validators.required,
           Validators.pattern(/^[ёЁА-яA-z\s\d\.\,\:\?\!\#\-\@\(\\'\")]+$/),
         ],
       ],
       need_to_know: [
-        this.meetupForEdit?.need_to_know || '',
+        this.meetupForEdit?.need_to_know || 'test',
         [
           Validators.required,
           Validators.pattern(/^[ёЁА-яA-z\s\d\.\,\:\?\!\#\-\@\(\\'\")]+$/),
         ],
       ],
       will_happen: [
-        this.meetupForEdit?.will_happen || '',
+        this.meetupForEdit?.will_happen || 'test',
         [
           Validators.required,
           Validators.pattern(/^[ёЁА-яA-z\s\d\.\,\:\?\!\#\-\@\(\\'\")]+$/),
         ],
       ],
       reason_to_come: [
-        this.meetupForEdit?.reason_to_come || '',
+        this.meetupForEdit?.reason_to_come || 'test',
         [
           Validators.required,
           Validators.pattern(/^[ёЁА-яA-z\s\d\.\,\:\?\!\#\-\@\(\\'\")]+$/),
@@ -124,8 +138,10 @@ export class MeetupFormComponent implements OnInit, OnChanges {
       name: this.meetupForm.value.name || '',
       description: this.meetupForm.value.description || '',
       time: this.meetupForm.value.date
-        ? `${this.meetupForm.value.date}T${this.meetupForm.value.time}:00.000Z`
-        : '',
+        ? new Date(
+            `${this.meetupForm.value.date}T${this.meetupForm.value.time}:00.000Z`
+          )
+        : new Date(),
       duration: this.meetupForm.value.duration || 0,
       location: this.meetupForm.value.location || '',
       target_audience: this.meetupForm.value.target_audience || '',
@@ -134,7 +150,8 @@ export class MeetupFormComponent implements OnInit, OnChanges {
       reason_to_come: this.meetupForm.value.reason_to_come || '',
     };
 
-    console.log(meetup);
+    console.log('meetupForEdit: ', this.meetupForEdit);
+    console.log('meetup from form: ', meetup);
 
     if (this.meetupForEdit) {
       this.handleClickChange.emit(meetup);

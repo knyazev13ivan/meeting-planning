@@ -33,7 +33,17 @@ export class MeetupCardComponent {
   @Output()
   public handleClickSetMeetup = new EventEmitter();
 
+  @Output()
+  public handleClickSubscribe = new EventEmitter();
+  @Output()
+  public handleClickUnSubscribe = new EventEmitter();
+
   toogleSub() {
+    if (this.isSubscribed) {
+      this.handleClickUnSubscribe.emit(this.meetup.id);
+    } else {
+      this.handleClickSubscribe.emit(this.meetup.id);
+    }
     this.isSubscribed = !this.isSubscribed;
   }
 

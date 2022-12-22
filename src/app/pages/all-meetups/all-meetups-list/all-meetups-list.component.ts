@@ -1,6 +1,19 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { Subscription } from 'rxjs';
-import { ICreatedMeetupDto, IMeetup, ISearch, IUser } from 'src/app/interfaces';
+import {
+  Component,
+  DoCheck,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import { Subscription, Observable, from, map } from 'rxjs';
+import {
+  ICreatedMeetupDto,
+  IMeetup,
+  ISearch,
+  ISubscribeMeetupDto,
+  IUser,
+} from 'src/app/interfaces';
+import { AuthService } from 'src/app/services/auth.service';
 import { MeetupsService } from 'src/app/services/meetups.service';
 
 @Component({
@@ -8,33 +21,37 @@ import { MeetupsService } from 'src/app/services/meetups.service';
   templateUrl: './all-meetups-list.component.html',
   styleUrls: ['./all-meetups-list.component.scss'],
 })
-export class AllMeetupsListComponent implements OnInit, OnDestroy {
-  _meetupsList!: IMeetup[];
-  _user: IUser | null = null;
-  meetupsListSubscription$!: Subscription;
+export class AllMeetupsListComponent implements OnInit, DoCheck, OnDestroy {
+  meetupsList!: IMeetup[];
+  idUser: number | null = null;
+  meetupsList$!: Subscription;
   isHideMeetupForm: boolean = true;
   _searchState: ISearch = {
     searchValue: '',
     type: 'title',
   };
 
-  constructor(public meetupsService: MeetupsService) {}
+  constructor(
+    private meetupsService: MeetupsService,
+    private authService: AuthService
+  ) {
+    this.idUser = authService.user.id;
+  }
 
   ngOnInit(): void {
-    this.meetupsListSubscription$ = this.meetupsService
+    this.meetupsList$ = this.meetupsService
+      .getMeetups()
+      .subscribe((data) => (this.meetupsList = data));
+  }
+
+  ngDoCheck(): void {
+    this.meetupsList$ = this.meetupsService
       .getMeetups()
       .subscribe((data) => (this.meetupsList = data));
   }
 
   ngOnDestroy(): void {
-    this.meetupsListSubscription$.unsubscribe();
-  }
-
-  set meetupsList(meetups: IMeetup[]) {
-    this._meetupsList = meetups;
-  }
-  get meetupsList(): IMeetup[] {
-    return this._meetupsList;
+    this.meetupsList$.unsubscribe();
   }
 
   set searchState(searchState: ISearch) {
@@ -47,7 +64,20 @@ export class AllMeetupsListComponent implements OnInit, OnDestroy {
   createMeetup(meetup: ICreatedMeetupDto) {
     console.log('create?');
 
-    this.meetupsService.createMeetup(meetup);
+    this.meetupsService
+      .createMeetup(meetup)
+      .subscribe((meetup) => this.meetupsList.push(meetup));
+  }
+
+  subscribe(idMeetup: number) {
+    this.meetupsService
+      .subscribeUser({ idMeetup, idUser: this.idUser! })
+      .subscribe((meetup) => console.log(meetup));
+  }
+  unSubscribe(idMeetup: number) {
+    this.meetupsService
+      .unsubscribeUser({ idMeetup, idUser: this.idUser! })
+      .subscribe((meetup) => console.log(meetup));
   }
 
   toggleViewMeetupForm() {
