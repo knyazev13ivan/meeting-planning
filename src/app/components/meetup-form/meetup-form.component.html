@@ -2,7 +2,13 @@
   <h2 class="meetup-form-modul__title">Создание митапа</h2>
   <form [formGroup]="meetupForm" class="form" (submit)="createNewMeetup()">
     <div class="field">
-      <label class="field__label" for="name">Название:</label>
+      <label class="field__label" for="name"
+        >Название:
+        <app-show-error
+          [form]="meetupForm"
+          [fieldName]="'name'"
+        ></app-show-error>
+      </label>
       <input
         type="text"
         class="field__input-text"
@@ -13,7 +19,12 @@
 
     <div class="date-time-block">
       <div class="field">
-        <label class="field__label" for="date">Дата:</label>
+        <label class="field__label" for="date"
+          >Дата:<app-show-error
+            [form]="meetupForm"
+            [fieldName]="'date'"
+          ></app-show-error
+        ></label>
         <input
           type="date"
           class="field__input-date"
@@ -22,7 +33,13 @@
         />
       </div>
       <div class="field">
-        <label class="field__label label-time" for="time">Время:</label>
+        <label class="field__label label-time" for="time"
+          >Время:
+          <app-show-error
+            [form]="meetupForm"
+            [fieldName]="'time'"
+          ></app-show-error>
+        </label>
         <input
           type="time"
           class="field__input-time"
@@ -53,7 +70,12 @@
     </div>
 
     <div class="field">
-      <label class="field__label" for="description">Описание:</label>
+      <label class="field__label" for="description"
+        >Описание:<app-show-error
+          [form]="meetupForm"
+          [fieldName]="'description'"
+        ></app-show-error
+      ></label>
       <textarea
         class="field__textarea"
         id="description"
