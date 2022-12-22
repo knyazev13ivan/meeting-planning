@@ -68,6 +68,11 @@
         margin-left: 40px;
       }
 
+      input.ng-touched.ng-invalid, 
+      textarea.ng-touched.ng-invalid {
+        border-color: red;
+      }
+
     }
 
     .date-time-block {

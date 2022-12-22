@@ -51,15 +51,21 @@ export class MeetupFormComponent implements OnInit, OnChanges {
     this.meetupForm = this.fb.group({
       name: [
         this.meetupForEdit?.name || '',
-        [Validators.required, Validators.pattern(/[ёЁА-яA-z\s]/)],
+        [
+          Validators.required,
+          Validators.pattern(/^[ёЁА-яA-z\s\d\.\,\:\?\!\#\-\@\(\\'\")]+$/),
+        ],
       ],
       description: [
         this.meetupForEdit?.description || '',
-        [Validators.required, Validators.pattern(/[ёЁА-яA-z\s\.]/)],
+        [
+          Validators.required,
+          Validators.pattern(/^[ёЁА-яA-z\s\d\.\,\:\?\!\#\-\@\(\\'\")]+$/),
+        ],
       ],
       date: [
         this.meetupForEdit?.time?.slice(0, 10) || '',
-        [Validators.required, Validators.pattern(/^\d+\.\d+\.\d+$/)],
+        [Validators.required, Validators.pattern(/[^д]|[^м]|[^г]/g)],
       ],
       time: [
         this.meetupForEdit?.time?.slice(11, 16) || '',
@@ -67,27 +73,42 @@ export class MeetupFormComponent implements OnInit, OnChanges {
       ],
       duration: [
         this.meetupForEdit?.duration || 0,
-        [Validators.required, Validators.pattern(/[0-9]/)],
+        [Validators.required, Validators.pattern(/^\d+$/)],
       ],
       location: [
         this.meetupForEdit?.location || '',
-        [Validators.required, Validators.pattern(/[ёЁА-яA-z\s\.]/)],
+        [
+          Validators.required,
+          Validators.pattern(/^[ёЁА-яA-z\s\d\.\,\:\?\!\#\-\@\(\\'\")]+$/),
+        ],
       ],
       target_audience: [
         this.meetupForEdit?.target_audience || '',
-        [Validators.required, Validators.pattern(/[ёЁА-яA-z\s\.]/)],
+        [
+          Validators.required,
+          Validators.pattern(/^[ёЁА-яA-z\s\d\.\,\:\?\!\#\-\@\(\\'\")]+$/),
+        ],
       ],
       need_to_know: [
         this.meetupForEdit?.need_to_know || '',
-        [Validators.required, Validators.pattern(/[ёЁА-яA-z\s\.]/)],
+        [
+          Validators.required,
+          Validators.pattern(/^[ёЁА-яA-z\s\d\.\,\:\?\!\#\-\@\(\\'\")]+$/),
+        ],
       ],
       will_happen: [
         this.meetupForEdit?.will_happen || '',
-        [Validators.required, Validators.pattern(/[ёЁА-яA-z\s\.]/)],
+        [
+          Validators.required,
+          Validators.pattern(/^[ёЁА-яA-z\s\d\.\,\:\?\!\#\-\@\(\\'\")]+$/),
+        ],
       ],
       reason_to_come: [
         this.meetupForEdit?.reason_to_come || '',
-        [Validators.required, Validators.pattern(/[ёЁА-яA-z\s\.]/)],
+        [
+          Validators.required,
+          Validators.pattern(/^[ёЁА-яA-z\s\d\.\,\:\?\!\#\-\@\(\\'\")]+$/),
+        ],
       ],
     });
   }

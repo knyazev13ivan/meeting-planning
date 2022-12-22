@@ -23,8 +23,7 @@ export class AllMeetupsListComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.meetupsListSubscription$ = this.meetupsService
       .getMeetups()
-      .subscribe({next: (data) => this.meetupsList = data});
-        // (data) => (this.meetupsList = data));
+      .subscribe((data) => (this.meetupsList = data));
   }
 
   ngOnDestroy(): void {
