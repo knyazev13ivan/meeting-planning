@@ -1,22 +1,22 @@
 <app-search (handleChangeSearch)="searchState = $event"></app-search>
 
 <div class="meetups-list">
-  <div *ngIf="!meetupsList.length" class="loading">loading</div>
+  <!-- <div *ngIf="!meetupsList.length" class="loading">loading</div> -->
 
-  <!-- <ng-container *ngIf="M | async as meetups"> -->
-  <ul *ngIf="isHideMeetupForm" class="meetups-list__list">
-    <app-meetup-card
-      *ngFor="
-        let meetup of meetupsList | filterMeetups : searchState;
-        trackBy: trackByItems
-      "
-      [meetup]="meetup"
-      [isMyMeetup]="false"
-      (handleClickSubscribe)="subscribe($event)"
-      (handleClickUnSubscribe)="unSubscribe($event)"
-    ></app-meetup-card>
-  </ul>
-  <!-- </ng-container> -->
+  <ng-container *ngIf="(getMeetups | async) as meetups">
+    <ul *ngIf="isHideMeetupForm" class="meetups-list__list">
+      <app-meetup-card
+        *ngFor="
+          let meetup of meetups | filterMeetups : searchState;
+          trackBy: trackByItems
+        "
+        [meetup]="meetup"
+        [isMyMeetup]="false"
+        (handleClickSubscribe)="subscribe($event)"
+        (handleClickUnSubscribe)="unSubscribe($event)"
+      ></app-meetup-card>
+    </ul>
+  </ng-container>
 
   <app-meetup-form
     [isCreateMode]="!isHideMeetupForm"

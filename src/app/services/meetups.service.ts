@@ -15,10 +15,10 @@ export class MeetupsService {
   constructor(private http: HttpClient) {}
 
   getMeetups(): Observable<IMeetup[]> {
-    this.http
+    return this.http
       .get<IMeetup[]>(this.meetupsUrl)
-      .subscribe((meetups) => this.meetupsList.next(meetups));
-    return this.meetupsList;
+      // .subscribe((meetups) => this.meetupsList.next(meetups));
+    // return this.meetupsList;
   }
 
   createMeetup(meetup: ICreatedMeetupDto): Observable<IMeetup> {

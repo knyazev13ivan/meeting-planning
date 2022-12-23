@@ -1,5 +1,20 @@
-import { Component, Input, OnDestroy, OnInit } from '@angular/core';
-import { filter, from, map, mergeMap, Subscription, tap } from 'rxjs';
+import {
+  Component,
+  DoCheck,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import {
+  filter,
+  from,
+  map,
+  mergeMap,
+  Observable,
+  Subscription,
+  tap,
+} from 'rxjs';
 import {
   IAuthUser,
   ICreatedMeetupDto,
@@ -14,11 +29,8 @@ import { MeetupsService } from 'src/app/services/meetups.service';
   templateUrl: './my-meetups-list.component.html',
   styleUrls: ['./my-meetups-list.component.scss'],
 })
-export class MyMeetupsListComponent implements OnInit, OnDestroy {
-  meetupsList: IMeetup[] = [];
+export class MyMeetupsListComponent implements OnInit {
   _user!: IAuthUser;
-  meetupsList$!: Subscription;
-  // meetupForChange: ICreatedMeetupDto | null = null;
   meetupForChange: any = null;
   currentMeetupId!: number;
   isHideMeetupForm: boolean = true;
@@ -34,23 +46,9 @@ export class MyMeetupsListComponent implements OnInit, OnDestroy {
     this.user = authService.user;
   }
 
-  ngOnInit(): void {
-    this.meetupsList$ = this.meetupsService
-      .getMeetups()
-      .pipe(
-        mergeMap((meetups: IMeetup[]) => from(meetups)),
-        filter((meetup: IMeetup) => meetup.owner.id === this.user.id)
-      )
-      .subscribe((meetup) => {
-        this.meetupsList.push(meetup);
+  ngOnInit(): void {}
 
-        // console.log(this.meetupsList);
-      });
-  }
-
-  ngOnDestroy(): void {
-    this.meetupsList$.unsubscribe();
-  }
+  getMeetups: Observable<IMeetup[]> = this.meetupsService.getMeetups();
 
   @Input() set user(user: IAuthUser) {
     this._user = user;
@@ -67,18 +65,13 @@ export class MyMeetupsListComponent implements OnInit, OnDestroy {
   }
 
   changeMeetup(meetup: ICreatedMeetupDto, id: number) {
-    this.meetupsService.changeMeetup(meetup, id).subscribe((meetup) => {
-      console.log(meetup);
-      this.meetupsList.push(meetup);
-    });
+    this.meetupsService.changeMeetup(meetup, id).subscribe();
 
     this.toggleViewMeetupForm();
   }
 
   createMeetup(meetup: ICreatedMeetupDto) {
-    this.meetupsService
-      .createMeetup(meetup)
-      .subscribe((meetup) => console.log(meetup));
+    this.meetupsService.createMeetup(meetup).subscribe();
   }
 
   set searchState(searchState: ISearch) {

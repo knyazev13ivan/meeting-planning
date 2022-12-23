@@ -6,7 +6,7 @@ import { IMeetup, ISearch } from '../interfaces';
 })
 export class FilterMeetupsPipe implements PipeTransform {
   transform(meetups: IMeetup[], searchState: ISearch): IMeetup[] {
-    if (searchState.searchValue.length === 0) return meetups;
+    // if (searchState.searchValue.length === 0) return meetups;
 
     if (searchState.type === 'fio') {
       return meetups
@@ -16,7 +16,7 @@ export class FilterMeetupsPipe implements PipeTransform {
       return meetups.slice(0).filter((meetup): any => {
         if (searchState.type !== 'fio')
           return meetup[searchState.type].includes(searchState.searchValue);
-      });
+      }).sort((a,b) => b.id - a.id);
     }
   }
 }

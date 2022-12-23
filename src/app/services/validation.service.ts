@@ -7,28 +7,22 @@ import { environment } from 'src/environments/environments';
 @Injectable({
   providedIn: 'root',
 })
-export class ValidationService implements OnInit{
-  isHas: boolean = false
+export class ValidationService {
+  isHas: boolean = false;
 
   constructor(private http: HttpClient) {}
 
-  ngOnInit(): void {
-    
-  }
-
   validateName(currentName: string): Observable<ValidationErrors> {
-    
-
     return new Observable<ValidationErrors>((observer) => {
-      //  const user =
       this.http
-      .get<any>(`${environment.backendOrigin}/meetup`)
-      .pipe(
-        mergeMap((result: any[]) => from(result)),
-        find((meetup) => meetup.name === currentName)
-      )
-      .subscribe((name) => (this.isHas = name ? false : true));
-      
+        .get<any>(`${environment.backendOrigin}/meetup`)
+        .pipe(
+          mergeMap((result: any[]) => from(result)),
+          find((meetup) => meetup.name === currentName)
+        )
+        .subscribe((name) => {
+          this.isHas = name ? true : false;
+        });
 
       if (this.isHas) {
         observer.next({

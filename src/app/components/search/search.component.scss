@@ -16,10 +16,6 @@
     color: var(--bold-color);
     background-color: var(--default-color);
     font-size: 1em;
-
-    &:hover {
-      border: 1px solid var(--create-color);
-    }
   }
 
   &__input {

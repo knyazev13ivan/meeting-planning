@@ -22,7 +22,6 @@ import { ValidationService } from 'src/app/services/validation.service';
   selector: 'app-meetup-form',
   templateUrl: './meetup-form.component.html',
   styleUrls: ['./meetup-form.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MeetupFormComponent implements OnInit, OnChanges {
   constructor(private fb: FormBuilder, private validation: ValidationService) {}
@@ -30,10 +29,10 @@ export class MeetupFormComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.initForm();
   }
-  
+
   @Input() isCreateMode: boolean = false;
   @Input() meetupForEdit?: ICreatedMeetupDto | null;
-  
+
   ngOnChanges(): void {}
 
   meetupForm!: FormGroup<{
@@ -60,7 +59,7 @@ export class MeetupFormComponent implements OnInit, OnChanges {
         [
           Validators.required,
           Validators.pattern(/^[ёЁА-яA-z\s\d\.\,\:\?\!\#\-\@\(\\'\")]+$/),
-          // this.asyncValidator.bind(this)
+          // this.asyncValidator.bind(this),
         ],
       ],
       description: [
@@ -148,9 +147,6 @@ export class MeetupFormComponent implements OnInit, OnChanges {
       will_happen: this.meetupForm.value?.will_happen || '',
       reason_to_come: this.meetupForm.value?.reason_to_come || '',
     };
-
-    console.log('meetupForEdit: ', this.meetupForEdit);
-    console.log('meetup from form: ', meetup);
 
     if (this.meetupForEdit) {
       this.handleClickChange.emit(meetup);

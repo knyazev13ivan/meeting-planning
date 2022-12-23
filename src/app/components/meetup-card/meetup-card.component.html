@@ -41,7 +41,7 @@
     <div *ngIf="isActual" class="controls">
       <button
         *ngIf="isMyMeetup"
-        (click)="handleClickSetMeetup.emit()"
+        (click)="handleClickSetMeetup.emit(meetup)"
         class="edit-btn"
       >
         Редактировать
