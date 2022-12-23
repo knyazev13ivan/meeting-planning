@@ -16,7 +16,7 @@ export class AllMeetupsListComponent implements OnInit, DoCheck, OnDestroy {
   isHideMeetupForm: boolean = true;
   _searchState: ISearch = {
     searchValue: '',
-    type: 'title',
+    type: 'name',
   };
 
   constructor(

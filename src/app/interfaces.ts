@@ -92,5 +92,5 @@ export interface IAuthUser {
 
 export interface ISearch {
   searchValue: string;
-  type: 'title' | 'description' | 'status';
+  type: 'name' | 'description' | 'location' | 'fio';
 }

@@ -7,11 +7,10 @@ import { ISearch } from 'src/app/interfaces';
   styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent {
-  constructor() {}
 
   searchState: ISearch = {
     searchValue: '',
-    type: 'title',
+    type: 'name',
   };
 
   @Output()

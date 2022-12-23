@@ -6,13 +6,17 @@ import { IMeetup, ISearch } from '../interfaces';
 })
 export class FilterMeetupsPipe implements PipeTransform {
   transform(meetups: IMeetup[], searchState: ISearch): IMeetup[] {
-    // if (searchState.searchValue.length === 0) return meetups;
+    if (searchState.searchValue.length === 0) return meetups;
 
-    // return meetups
-    return meetups.slice(0).sort((a, b) => b.id- +a.id);
-
-    // return meetups.slice(0).filter((meetup) => {
-    // return meetup[searchState.type].includes(searchState.searchValue);
-    // });
+    if (searchState.type === 'fio') {
+      return meetups
+        .slice(0)
+        .filter((meetup) => meetup.owner.fio.includes(searchState.searchValue));
+    } else {
+      return meetups.slice(0).filter((meetup): any => {
+        if (searchState.type !== 'fio')
+          return meetup[searchState.type].includes(searchState.searchValue);
+      });
+    }
   }
 }

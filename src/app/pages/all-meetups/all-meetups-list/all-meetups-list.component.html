@@ -1,3 +1,5 @@
+<app-search (handleChangeSearch)="searchState = $event"></app-search>
+
 <div class="meetups-list">
   <div *ngIf="!meetupsList.length" class="loading">loading</div>
 
@@ -5,7 +7,7 @@
   <ul *ngIf="isHideMeetupForm" class="meetups-list__list">
     <app-meetup-card
       *ngFor="
-        let meetup of meetupsList | filterMeetups: searchState;
+        let meetup of meetupsList | filterMeetups : searchState;
         trackBy: trackByItems
       "
       [meetup]="meetup"

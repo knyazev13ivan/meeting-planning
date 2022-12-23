@@ -24,7 +24,7 @@ export class MyMeetupsListComponent implements OnInit, OnDestroy {
   isHideMeetupForm: boolean = true;
   _searchState: ISearch = {
     searchValue: '',
-    type: 'title',
+    type: 'name',
   };
 
   constructor(

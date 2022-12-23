@@ -4,6 +4,7 @@ import { AllMeetupsListComponent } from './all-meetups-list/all-meetups-list.com
 import { MeetupCardModule } from 'src/app/components/meetup-card/meetup-card.module';
 import { FilterMeetupsModule } from 'src/app/pipes/filter-meetups.module';
 import { MeetupFormModule } from 'src/app/components/meetup-form/meetup-form.module';
+import { SearchModule } from 'src/app/components/search/search.module';
 
 @NgModule({
   declarations: [AllMeetupsListComponent],
@@ -12,6 +13,7 @@ import { MeetupFormModule } from 'src/app/components/meetup-form/meetup-form.mod
     MeetupCardModule,
     FilterMeetupsModule,
     MeetupFormModule,
+    SearchModule
   ],
   exports: [AllMeetupsListComponent],
 })
