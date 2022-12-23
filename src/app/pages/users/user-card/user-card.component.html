@@ -1,0 +1,43 @@
+<div class="user-card">
+  <form class="form" [formGroup]="userForm" (submit)="updateUser()">
+    <div class="form__email">
+      <input
+        [ngClass]="{ 'purple-border': isEditMode }"
+        [readOnly]="!isEditMode"
+        type="text"
+        formControlName="email"
+        class="form__input"
+      />
+    </div>
+    <div class="form__password">
+      <input
+        [ngClass]="{ 'purple-border': isEditMode }"
+        [readOnly]="!isEditMode"
+        type="password"
+        formControlName="password"
+        class="form__input"
+      />
+    </div>
+    <div class="form__fio">
+      <input
+        [ngClass]="{ 'purple-border': isEditMode }"
+        [readOnly]="!isEditMode"
+        type="text"
+        formControlName="fio"
+        class="form__input"
+      />
+    </div>
+
+    <button class="form__delete-btn" (click)="deleteUser()">Удалить</button>
+    <button
+      *ngIf="!isEditMode"
+      class="form__update-btn"
+      (click)="toogleEditMode()"
+    >
+      Редактировать
+    </button>
+    <button *ngIf="isEditMode" class="form__done-btn" type="submit">
+      Готово
+    </button>
+  </form>
+</div>

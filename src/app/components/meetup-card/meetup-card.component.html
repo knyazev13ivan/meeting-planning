@@ -49,7 +49,6 @@
       <button
         *ngIf="!isMyMeetup"
         [ngClass]="{
-          'subscribe-btn__go': !isSubscribed,
           'subscribe-btn__not-go': isSubscribed
         }"
         (click)="toogleSub()"

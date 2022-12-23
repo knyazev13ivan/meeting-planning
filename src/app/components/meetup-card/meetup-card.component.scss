@@ -116,11 +116,9 @@
         box-shadow: 0px 4px 4px rgba(62, 5, 4, 0.25);
         font-size: 18px;
         line-height: 25px;
-
-        &__go {
-          background-color: var(--secondary-color);
-          color: var(--bold-color);
-        }
+        background-color: var(--secondary-color);
+        color: var(--bold-color);
+        cursor: pointer;
 
         &__not-go {
           background-color: var(--primary-color);

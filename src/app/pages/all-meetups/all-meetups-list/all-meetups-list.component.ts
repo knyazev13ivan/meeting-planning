@@ -1,18 +1,6 @@
-import {
-  Component,
-  DoCheck,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
-import { Subscription, Observable, from, map } from 'rxjs';
-import {
-  ICreatedMeetupDto,
-  IMeetup,
-  ISearch,
-  ISubscribeMeetupDto,
-  IUser,
-} from 'src/app/interfaces';
+import { Component, DoCheck, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { ICreatedMeetupDto, IMeetup, ISearch } from 'src/app/interfaces';
 import { AuthService } from 'src/app/services/auth.service';
 import { MeetupsService } from 'src/app/services/meetups.service';
 

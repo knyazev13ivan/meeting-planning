@@ -1,7 +1,6 @@
 import {
   ChangeDetectionStrategy,
   Component,
-  DoCheck,
   EventEmitter,
   Input,
   OnChanges,
@@ -28,14 +27,14 @@ import { ValidationService } from 'src/app/services/validation.service';
 export class MeetupFormComponent implements OnInit, OnChanges {
   constructor(private fb: FormBuilder, private validation: ValidationService) {}
 
-  @Input() isCreateMode: boolean = false;
-  @Input() meetupForEdit?: ICreatedMeetupDto | null;
-
-  ngOnInit(): void {}
-
-  ngOnChanges(): void {
+  ngOnInit(): void {
     this.initForm();
   }
+  
+  @Input() isCreateMode: boolean = false;
+  @Input() meetupForEdit?: ICreatedMeetupDto | null;
+  
+  ngOnChanges(): void {}
 
   meetupForm!: FormGroup<{
     name: FormControl<string | null>;
@@ -135,19 +134,19 @@ export class MeetupFormComponent implements OnInit, OnChanges {
 
   createNewMeetup() {
     const meetup: ICreatedMeetupDto = {
-      name: this.meetupForm.value.name || '',
-      description: this.meetupForm.value.description || '',
-      time: this.meetupForm.value.date
+      name: this.meetupForm.value?.name || '',
+      description: this.meetupForm.value?.description || '',
+      time: this.meetupForm.value?.date
         ? new Date(
-            `${this.meetupForm.value.date}T${this.meetupForm.value.time}:00.000Z`
+            `${this.meetupForm.value?.date}T${this.meetupForm.value?.time}:00.000Z`
           )
         : new Date(),
-      duration: this.meetupForm.value.duration || 0,
-      location: this.meetupForm.value.location || '',
-      target_audience: this.meetupForm.value.target_audience || '',
-      need_to_know: this.meetupForm.value.need_to_know || '',
-      will_happen: this.meetupForm.value.will_happen || '',
-      reason_to_come: this.meetupForm.value.reason_to_come || '',
+      duration: this.meetupForm.value?.duration || 0,
+      location: this.meetupForm.value?.location || '',
+      target_audience: this.meetupForm.value?.target_audience || '',
+      need_to_know: this.meetupForm.value?.need_to_know || '',
+      will_happen: this.meetupForm.value?.will_happen || '',
+      reason_to_come: this.meetupForm.value?.reason_to_come || '',
     };
 
     console.log('meetupForEdit: ', this.meetupForEdit);

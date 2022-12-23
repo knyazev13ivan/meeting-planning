@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environments';
 import {
   IAddRoleDto,
   ICreateUserDto,
+  IRole,
   IUpdateRoleDto,
   IUser,
 } from '../interfaces';
@@ -24,19 +25,19 @@ export class UsersService {
       .pipe(tap((users) => (this.users = users)));
   }
 
-  addRole(role: IAddRoleDto) {
-    this.http.put(`${this.usersUrl}/role`, role);
+  addRole(role: IAddRoleDto): Observable<IRole> {
+    return this.http.put<IRole>(`${this.usersUrl}/role`, role);
   }
 
   getRoles(roles: IUpdateRoleDto): Observable<IUpdateRoleDto> {
     return this.http.post<IUpdateRoleDto>(`${this.usersUrl}/role`, roles);
   }
 
-  updateUser(user: ICreateUserDto, id: number) {
-    this.http.put(`${this.usersUrl}/${id}`, user);
+  updateUser(user: ICreateUserDto, id: number): Observable<IUser> {
+    return this.http.put<IUser>(`${this.usersUrl}/${id}`, user);
   }
 
-  deleteUser(id: number) {
-    this.http.delete(`${this.usersUrl}/${id}`);
+  deleteUser(id: number): Observable<IUser> {
+    return this.http.delete<IUser>(`${this.usersUrl}/${id}`);
   }
 }

@@ -1,0 +1,10 @@
+<div class="user-list">
+  <ul class="list">
+    <app-user-card
+      *ngFor="let user of usersList"
+      [user]="user"
+      (handleClickEdit)="updateUser($event)"
+      (handleClickDelete)="deleteUser($event)"
+    ></app-user-card>
+  </ul>
+</div>
